@@ -178,17 +178,18 @@ void vidurkio_spausdinimas(studentas &temp)
 }
 void medianos_spausdinimas(studentas &temp)
 {
-    vector<int> pazymiai = temp.pazymiai;
-    pazymiai.push_back(temp.egz);
-    sort(pazymiai.begin(), pazymiai.end());
+
+    sort(temp.pazymiai.begin(), temp.pazymiai.end());
     cout << setw(15) << left << temp.vardas << setw(20) << left << temp.pavarde;
-    if ((temp.pazymiai.size() + 1) % 2 == 1)
+    double mediana;
+    if (temp.pazymiai.size() % 2 == 1)
     {
-        cout << pazymiai[(temp.pazymiai.size() + 1) / 2];
+        mediana = temp.pazymiai[(temp.pazymiai.size()) / 2];
     }
-    else if ((temp.pazymiai.size() + 1) % 2 == 0)
+    else if (temp.pazymiai.size() % 2 == 0)
     {
-        cout << (pazymiai[(temp.pazymiai.size()) / 2] + pazymiai[(temp.pazymiai.size()) / 2 + 1]) * 1.0 / 2.0;
+        mediana = (temp.pazymiai[(temp.pazymiai.size()) / 2 - 1] + temp.pazymiai[(temp.pazymiai.size()) / 2]) * 1.0 / 2.0;
     }
-    cout << endl;
+
+    cout << setprecision(3) << 0.4 * mediana + 0.6 * temp.egz << endl;
 }

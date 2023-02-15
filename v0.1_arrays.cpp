@@ -212,20 +212,17 @@ void vidurkio_spausdinimas(studentas &temp)
 }
 void medianos_spausdinimas(studentas &temp)
 {
-    int *pazymiai;
-    pazymiai = new int[temp.pazymiu_kiekis + 1];
-    copy(temp.pazymiai, temp.pazymiai + temp.pazymiu_kiekis, pazymiai);
-    pazymiai[temp.pazymiu_kiekis] = temp.egz;
-    sort(pazymiai, pazymiai + temp.pazymiu_kiekis + 1);
+    sort(temp.pazymiai, temp.pazymiai + temp.pazymiu_kiekis);
     cout << setw(15) << left << temp.vardas << setw(20) << left << temp.pavarde;
-    if ((temp.pazymiu_kiekis + 1) % 2 == 1)
+    double mediana;
+    if ((temp.pazymiu_kiekis) % 2 == 1)
     {
-        cout << pazymiai[(temp.pazymiu_kiekis + 1) / 2];
+        mediana = temp.pazymiai[(temp.pazymiu_kiekis) / 2];
     }
-    else if ((temp.pazymiu_kiekis + 1) % 2 == 0)
+    else if ((temp.pazymiu_kiekis) % 2 == 0)
     {
-        cout << (pazymiai[(temp.pazymiu_kiekis) / 2] + pazymiai[(temp.pazymiu_kiekis) / 2 + 1]) * 1.0 / 2.0;
+        mediana = (temp.pazymiai[(temp.pazymiu_kiekis) / 2 - 1] + temp.pazymiai[(temp.pazymiu_kiekis) / 2]) * 1.0 / 2.0;
     }
-    cout << endl;
-    delete[] pazymiai;
+
+    cout << setprecision(3) << 0.4 * mediana + 0.6 * temp.egz << endl;
 }
