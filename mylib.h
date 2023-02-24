@@ -20,12 +20,15 @@ using std::sort;
 using std::string;
 using std::swap;
 using std::vector;
-
 using std::ifstream;
-
+using std::ofstream;
+using std::count;
+using std::getline;
+using std::mt19937;
 using std::numeric_limits;
+using std::random_device;
 using std::streamsize;
 using std::to_string;
-using std::getline;
-using std::count;
+using std::uniform_int_distribution;
+
 
