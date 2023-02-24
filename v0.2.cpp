@@ -70,6 +70,8 @@ void pildymasKonsoleje(vector<studentas> &studentai)
 }
 void failoSkaitymas(vector<studentas> &studentai)
 {
+    auto start = high_resolution_clock::now();
+
     ifstream in("pazymiai.txt");
     if (!in.is_open())
     {
@@ -96,11 +98,16 @@ void failoSkaitymas(vector<studentas> &studentai)
         in >> temp.egz;
         vidurkioSkaiciavimas(temp);
         medianosSkaiciavimas(temp);
+        temp.pazymiai.clear();
         studentai.push_back(temp);
         temp.pazymiai.clear();
     }
     in.close();
-    cout << "Failas nuskaitytas" << endl;
+
+    auto stop = high_resolution_clock::now();
+
+    auto duration = duration_cast<milliseconds>(stop - start);
+    cout << "Failas nuskaitytas per " << duration.count() << "ms" << endl;
 }
 void duomenuIvedimas(studentas &temp)
 {
@@ -146,6 +153,7 @@ void duomenuIvedimas(studentas &temp)
 
     vidurkioSkaiciavimas(temp);
     medianosSkaiciavimas(temp);
+    temp.pazymiai.clear();
 
     cout << "Duomenys įrašyti" << endl;
 }
@@ -202,6 +210,7 @@ void generuotiAtsitiktinius(vector<studentas> &studentai)
         temp.egz = dist(mt);
         vidurkioSkaiciavimas(temp);
         medianosSkaiciavimas(temp);
+        temp.pazymiai.clear();
         studentai.push_back(temp);
         temp.pazymiai.clear();
     }
@@ -209,60 +218,19 @@ void generuotiAtsitiktinius(vector<studentas> &studentai)
 }
 void spausdinimas(vector<studentas> &studentai)
 {
-    cout << "Prašome palaukti. Sąrašas rikiuojamas..." << endl;
-    sort(studentai.begin(), studentai.end(), rikiavimoLyginimas);
+    // cout << "Prašome palaukti. Sąrašas rikiuojamas..." << endl;
+    // sort(studentai.begin(), studentai.end(), rikiavimoLyginimas);
 
-    int isvedimoPasirinkimas = 4;
-
-    while (isvedimoPasirinkimas != 0)
-    {
-        while ((isvedimoPasirinkimas != 0 && isvedimoPasirinkimas != 1 && isvedimoPasirinkimas != 2) || cin.fail())
-        {
-            if (cin.fail())
-            {
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            }
-            cout << "Kokius duomenis norite gauti? (Galutiniai balai - 1; studentų pažymius - 2; ištrinti duomenis ir išeiti - 0)" << endl;
-            cin >> isvedimoPasirinkimas;
-        }
-
-        ofstream out("rez.txt");
-
-        if (isvedimoPasirinkimas == 0)
-            break;
-
-        cout << "Duomenų išvedimas vykdomas..." << endl;
-
-        if (isvedimoPasirinkimas == 1)
-        {
-            out << setw(15) << left << "Vardas" << setw(20) << left << "Pavardė"
-                << setw(18) << left << "Galutinis (Vid.)" << setw(18) << left << "Galutinis (Med.)" << endl
-                << "----------------------------------------------------------------" << endl;
-            for (int i = 0; i < studentai.size(); i++)
-                out << setw(15) << studentai[i].vardas << setw(20) << studentai[i].pavarde << setw(18) << left << setprecision(3) << studentai[i].vidurkis << setw(18) << left << setprecision(3) << studentai[i].mediana << endl;
-            cout << "Duomenys išvesti" << endl;
-        }
-        else if (isvedimoPasirinkimas == 2)
-        {
-            out << setw(15) << left << "Vardas" << setw(20) << left << "Pavardė"
-                << "Pažymiai" << endl;
-            for (int i = 0; i < studentai.size(); i++)
-            {
-                out << setw(15) << studentai[i].vardas << setw(20) << studentai[i].pavarde;
-                if (studentai[i].pazymiai.size() == 0)
-                    out << "Pažymių nėra";
-                else
-                    for (int j = 0; j < studentai[i].pazymiai.size(); j++)
-                        out << setw(3) << studentai[i].pazymiai[j];
-
-                out << "  Egzaminas:" << setw(5) << studentai[i].egz << endl;
-            }
-            cout << "Duomenys išvesti" << endl;
-        }
-
-        isvedimoPasirinkimas = 4;
-    }
+    cout << "Duomenų išvedimas vykdomas..." << endl;
+    auto start = high_resolution_clock::now();
+    ofstream out("rez.txt");
+    out << setw(15) << left << "Vardas" << setw(20) << left << "Pavardė" << setw(18) << left << "Galutinis (Vid.)" << setw(18) << left << "Galutinis (Med.)" << endl
+        << "----------------------------------------------------------------" << endl;
+    for (int i = 0; i < studentai.size(); i++)
+        out << setw(15) << studentai[i].vardas << setw(20) << studentai[i].pavarde << setw(18) << left << setprecision(3) << studentai[i].vidurkis << setw(18) << left << setprecision(3) << studentai[i].mediana << endl;
+    auto stop = high_resolution_clock::now();
+    auto duration = duration_cast<milliseconds>(stop - start);
+    cout << "Duomenys išvesti per " << duration.count() << "ms" << endl;
 }
 void vidurkioSkaiciavimas(studentas &temp)
 {
