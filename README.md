@@ -1,3 +1,11 @@
+# v0.2
+
+1. Pridėta galimybė studentų pažymius skaityti iš failo "studentai.txt"
+2. Patobulintas atsitiktinių duomenų generavimas naudojant "mt19937"
+3. Patobulintas klaidingų įvedimų apdorojimas
+4. Optimizuotas RAM naudojimas, apskaičiavus galutinius pažymius ištrinant nebereikalingus pažymius.
+5. Duomenys išvedami į failą "rez.txt", bereikalingai neapkraunant konsolės
+
 # v0.1
 1.  Programa nuskaito vartotojo įvedamus duomenis: studento vardą ir pavardę.
 2.  Leidžia įvesti pažymius ranka, arba generuoti atsitiktinius.

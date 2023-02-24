@@ -6,21 +6,31 @@
 #include <fstream>
 #include <vector>
 #include <random>
+#include <string>
+#include <chrono>
 
 using std::cin;
 using std::copy;
+using std::count;
 using std::cout;
 using std::endl;
+using std::getline;
+using std::ifstream;
 using std::left;
+using std::mt19937;
+using std::numeric_limits;
+using std::ofstream;
+using std::random_device;
 using std::right;
 using std::setprecision;
 using std::setw;
+using std::sort;
+using std::streamsize;
 using std::string;
 using std::swap;
+using std::to_string;
+using std::uniform_int_distribution;
 using std::vector;
-using std::sort;
-
-using std::ifstream;
-
-using std::numeric_limits;
-using std::streamsize;
+using std::chrono::duration_cast;
+using std::chrono::high_resolution_clock;
+using std::chrono::milliseconds;
