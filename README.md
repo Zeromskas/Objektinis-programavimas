@@ -1,3 +1,10 @@
+# v0.3
+
+1. Struktūros perkeltos į header failą.
+2. Pridėta galimybė pasirinkti duomenų failą iš aplankalo.
+3. Naudojamas try-catch atidarinėjant failą.
+4. Optimizuotas failo išvedimas, naudojant atskirą stream ir į rez.txt kreipiantis ir rašant duomenis kas dešimtą studentą. 
+
 # v0.2
 
 1. Pridėta galimybė studentų pažymius skaityti iš failo "studentai.txt"
