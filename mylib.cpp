@@ -189,38 +189,24 @@ void failoSkaitymas(vector<Studentas> &studentai)
     // }
 
     in.close();
-
     auto stop = high_resolution_clock::now();
+    duration<double> duration = stop - start;
 
-    auto duration = duration_cast<seconds>(stop - start);
     cout << "Failas nuskaitytas per " << duration.count() << "s. Rasta " << studentai.size() << " studentų" << endl;
 }
 
 void spausdinimas(vector<Studentas> &studentai)
 {
     cout << "Prašome palaukti. Sąrašas rikiuojamas..." << endl;
+    auto start = high_resolution_clock::now();
     sort(studentai.begin(), studentai.end(), rikiavimoLyginimas);
+    auto stop = high_resolution_clock::now();
+    duration<double> duration= stop - start;
+    cout << "Sąrašas sutikiuotas per "<<duration.count() << "s" << endl;
 
     cout << "Duomenų išvedimas vykdomas..." << endl;
-    auto start = high_resolution_clock::now();
+    start = high_resolution_clock::now();
     ofstream out("rez.txt");
-    // ostringstream oss;
-
-    // oss << setw(15) << left << "Vardas" << setw(20) << left << "Pavardė" << setw(18) << left << "Galutinis (Vid.)" << setw(18) << left << "Galutinis (Med.)" << endl
-    //     << "----------------------------------------------------------------" << endl;
-    // out << oss.str();
-    // oss.str("");
-
-    // for (int i = 0; i < studentai.size(); i++)
-    // {
-    //     oss << setw(15) << left << studentai[i].vardas << setw(20) << left << studentai[i].pavarde << setw(18) << left << setprecision(3) << studentai[i].vidurkis << setw(18) << left << setprecision(3) << studentai[i].mediana << endl;
-    //     if ((i + 1) / 5 == 0 || i + 1 == studentai.size())
-    //     {
-    //         out << oss.str();
-    //         oss.str("");
-    //         oss.reset();
-    //     }
-    // }
 
     unique_ptr<ostringstream> oss(new ostringstream());
 
@@ -241,8 +227,8 @@ void spausdinimas(vector<Studentas> &studentai)
 
     //
     out.close();
-    auto stop = high_resolution_clock::now();
-    auto duration = duration_cast<seconds>(stop - start);
+    stop = high_resolution_clock::now();
+    duration = stop - start;
     cout << "Duomenys išvesti per " << duration.count() << "s" << endl;
 }
 

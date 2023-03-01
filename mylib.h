@@ -40,8 +40,10 @@ using std::vector;
 using std::chrono::duration_cast;
 using std::chrono::high_resolution_clock;
 using std::chrono::seconds;
+using std::chrono::milliseconds;
+using std::chrono::duration;
 
-struct Studentas
+    struct Studentas
 {
     string vardas, pavarde;
     double vidurkis = 0;

@@ -17,21 +17,27 @@ int main()
         }
     }
     if (ivedimoTipas == 0)
-        try
         {
-            failoSkaitymas(studentai);
-        }
-        catch (const exception &e)
-        {
-            cerr << "Klaida: " << e.what() << endl;
-            return 0;
+            while(true)
+            {
+                try
+                {
+                    failoSkaitymas(studentai);
+                    break;
+                }
+                catch (const exception &e)
+                {
+                    cerr << "Klaida: " << e.what() << endl;
+                }
+            }
         }
     else if (ivedimoTipas == 1)
         pildymasKonsoleje(studentai);
     else if (ivedimoTipas == 2)
         generuotiAtsitiktinius(studentai);
 
-    spausdinimas(studentai);
+    if(studentai.size()>0)
+        spausdinimas(studentai);
 
     studentai.clear();
 
