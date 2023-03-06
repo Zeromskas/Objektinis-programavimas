@@ -1,24 +1,19 @@
 #include <fstream>
 #include <random>
 #include <iostream>
+#include <sstream>
 
-using std::cout;
-using std::endl;
-using std::left;
-using std::mt19937;
-using std::ofstream;
-using std::random_device;
-using std::setprecision;
-using std::setw;
-using std::uniform_int_distribution;
+using namespace std;
 
 int main()
 {
 
     int studentuKiekis = 10000000;
-    int pazymiuKiekis = 7;
+    int pazymiuKiekis = 15;
 
-    ofstream out("pazymiai.txt");
+    std::string filename = "studentai" + std::to_string(studentuKiekis) + ".txt";
+
+    ofstream out(filename);
 
     random_device rd;
     mt19937 mt(rd());
@@ -31,15 +26,22 @@ int main()
     }
     out << "Egzaminas" << endl;
 
+    unique_ptr<ostringstream> oss(new ostringstream());
+
     for (int i = 1; i <= studentuKiekis; i++)
     {
-        out << "Vardas" << setw(9) << left << i << "Pavardė" << setw(12) << left << i;
+        (*oss) << "Vardas" << setw(9) << left << i << "Pavardė" << setw(12) << left << i;
         for (int j = 0; j < pazymiuKiekis; j++)
         {
-            out << setw(5) << left << dist(mt);
+            (*oss) << setw(5) << left << dist(mt);
         }
-        out << dist(mt) << endl;
-        if (i % 100000 == 0)
+        (*oss) << dist(mt) << endl;
+        if ((i + 1) % 10 == 0 || i + 1 == studentuKiekis)
+        {
+            out << oss->str();
+            oss->str("");
+        }
+        if (i % (studentuKiekis / 100) == 0)
             cout << 100 * i / studentuKiekis << "%" << endl;
     }
 }
