@@ -1,0 +1,70 @@
+1.000 studentų failas sugeneruotas per 0.00598957s
+10.000 studentų failas sugeneruotas per 0.0382584s
+100.000 studentų failas sugeneruotas per 0.380939s
+1.000.000 studentų failas sugeneruotas per 3.72492s
+10.000.000 studentų failas sugeneruotas per 35.2158s
+
+
+
+
+1.000 studentų
+
+Failas nuskaitytas per 0.00919477s.
+Sąrašas surikiuotas per 0.000148336s
+Duomenys padalinti per 0.000027192s
+Sąrašas surikiuotas per 0.000172202s
+Sąrašas surikiuotas per 0.000157669s
+Pass duomenys išvesti per 0.00121432s
+Fail duomenys išvesti per 0.00109419s
+
+Failo apdorojimas užtruko 0.0121888s.
+
+
+10.000 studentų
+
+Failas nuskaitytas per 0.0439816s.
+Sąrašas surikiuotas per 0.000695648s
+Duomenys padalinti per 0.000248797s
+Sąrašas surikiuotas per 0.00120295s
+Sąrašas surikiuotas per 0.00124746s
+Pass duomenys išvesti per 0.00500099s
+Fail duomenys išvesti per 0.00500099s
+
+Failo apdorojimas užtruko 0.057885s.
+
+100.000 studentų
+
+Failas nuskaitytas per 0.354013s.
+Sąrašas surikiuotas per 0.00694268s
+Duomenys padalinti per 0.00309657s
+Sąrašas surikiuotas per 0.0167416s
+Sąrašas surikiuotas per 0.016223s
+Pass duomenys išvesti per 0.0519253s
+Fail duomenys išvesti per 0.0536156s
+
+Failo apdorojimas užtruko 0.506345s.
+
+1.000.000 studentų
+
+Failas nuskaitytas per 3.36643s.
+Sąrašas surikiuotas per 0.0734473s
+Duomenys padalinti per 0.0304525s
+Sąrašas surikiuotas per 0.193065s
+Sąrašas surikiuotas per 0.193872s
+Pass duomenys išvesti per 0.402847s
+Fail duomenys išvesti per 0.382708s
+
+Failo apdorojimas užtruko 4.68157s.
+
+10.000.000
+
+Failas nuskaitytas per 34.6987s.
+Sąrašas surikiuotas per 0.819084s
+Duomenys padalinti per 0.446871s
+Sąrašas surikiuotas per 2.31134s
+Sąrašas surikiuotas per 2.27226s
+Pass duomenys išvesti per 4.10531s
+Fail duomenys išvesti per 4.21605s
+
+Failo apdorojimas užtruko 49.3691s.
+
