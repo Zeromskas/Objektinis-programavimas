@@ -14,7 +14,7 @@ Programos veikimo principas:
 4. Abi dalys surikiuojamos pagal vardą ir pavardę
 5. Abi dalys išvedamos į atskirus failus
 
-Atliktas programos greitaveikos testavimas
+Atliktas programos [greitaveikos testavimas](greitaveikosAtaskaita.txt)
 
 # v0.3
 
