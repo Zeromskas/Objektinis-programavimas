@@ -1,3 +1,21 @@
+# v0.4
+
+1. Pridėta studentų pažymių failus generuojanti programa.
+2. Pridėtas bendras ir atskirų programos dalių vykdymo laiko skaičiavimas.
+3. Patobulinta studentų sarašo rikiavimo funkcija (pridėta galimybė pasirinkti rikiuoti pagal vardus arba pagal galutinius įvertinimus).
+4. Pridėta studento sarašo dalinimo į dvi dalis (Pass ir Fail) funkcija.
+6. Rezultatas gaunamas kaip 2 atskiri failai ("studPass.txt", "studFail.txt").
+7. Optimizuotas RAM naudojimas.
+
+Programos veikimo principas: 
+1. Nuskaitomi studentų duomenys iš pasirinkto failo
+2. Studentų sąrašas surikiuojamas pagal galutinius pažymius didėjimo tvarka
+3. Sąrašas padalinamas į dvi dalis (<5 ir >=5)
+4. Abi dalys surikiuojamos pagal vardą ir pavardę
+5. Abi dalys išvedamos į atskirus failus
+
+Atliktas programos [greitaveikos testavimas](greitaveikosAtaskaita.txt)
+
 # v0.3
 
 1. Struktūros perkeltos į header failą.

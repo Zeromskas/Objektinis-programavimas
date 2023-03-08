@@ -43,11 +43,11 @@ using std::chrono::seconds;
 using std::chrono::milliseconds;
 using std::chrono::duration;
 
-    struct Studentas
+struct Studentas
 {
     string vardas, pavarde;
-    double vidurkis = 0;
-    double mediana = 0;
+    float vidurkis = 0;
+    float mediana = 0;
 };
 
 struct Pazymiai
@@ -56,11 +56,19 @@ struct Pazymiai
     int egz = 0;
 };
 
-double vidurkioSkaiciavimas(Pazymiai &temp);
-double medianosSkaiciavimas(Pazymiai &temp);
+
+
+float vidurkioSkaiciavimas(Pazymiai &temp);
+float medianosSkaiciavimas(Pazymiai &temp);
 void generuotiAtsitiktinius(vector<Studentas> &studentai);
 void pildymasKonsoleje(vector<Studentas> &studentai);
-void spausdinimas(vector<Studentas> &studentai);
-void failoSkaitymas(vector<Studentas> &studentai);
+void spausdinimas(vector<Studentas> &studentai, string filename);
+void failoSkaitymas(vector<Studentas> &studentai, string filename);
 void duomenuIvedimas(Studentas &temp);
-bool rikiavimoLyginimas(const Studentas &a, const Studentas &b);
+bool compareName(const Studentas &a, const Studentas &b);
+bool compareGrade(const Studentas &a, const Studentas &b);
+
+// void splittinimas(vector<Studentas> &studentai, vector<Studentas> &studPass, vector<Studentas> &studFail);
+void splittinimas(vector<Studentas> &studentai, vector<Studentas> &studFail);
+
+void rikiavimas(vector<Studentas> &studentai, string sortType);

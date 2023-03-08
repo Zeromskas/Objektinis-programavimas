@@ -1,5 +1,6 @@
 #include "mylib.h"
 
+
 void pildymasKonsoleje(vector<Studentas> &studentai)
 {
     char testi;
@@ -129,17 +130,12 @@ void generuotiAtsitiktinius(vector<Studentas> &studentai)
     cout << "Generavimas baigtas" << endl;
 }
 
-void failoSkaitymas(vector<Studentas> &studentai)
+void failoSkaitymas(vector<Studentas> &studentai, string filename)
 {
-
-    system("ls");
-    string failas;
-    cout << "Įveskite pažymių failo pavadinimą:" << endl;
-    cin >> failas;
 
     auto start = high_resolution_clock::now();
 
-    ifstream in(failas);
+    ifstream in(filename);
 
     if (!in.is_open())
     {
@@ -192,21 +188,24 @@ void failoSkaitymas(vector<Studentas> &studentai)
     auto stop = high_resolution_clock::now();
     duration<double> duration = stop - start;
 
-    cout << "Failas nuskaitytas per " << duration.count() << "s. Rasta " << studentai.size() << " studentų" << endl;
+    cout << studentai.size() << " studentų" << endl;
+    cout<< "Failas nuskaitytas per " << duration.count() << "s." << endl;
 }
-
-void spausdinimas(vector<Studentas> &studentai)
+void rikiavimas(vector<Studentas> &studentai, string sortType)
 {
-    cout << "Prašome palaukti. Sąrašas rikiuojamas..." << endl;
     auto start = high_resolution_clock::now();
-    sort(studentai.begin(), studentai.end(), rikiavimoLyginimas);
+    if (sortType == "name")
+        sort(studentai.begin(), studentai.end(), compareName);
+    if (sortType == "grade")
+        sort(studentai.begin(), studentai.end(), compareGrade);
     auto stop = high_resolution_clock::now();
-    duration<double> duration= stop - start;
-    cout << "Sąrašas sutikiuotas per "<<duration.count() << "s" << endl;
-
-    cout << "Duomenų išvedimas vykdomas..." << endl;
-    start = high_resolution_clock::now();
-    ofstream out("rez.txt");
+    duration<double> duration = stop - start;
+    cout << "Sąrašas surikiuotas per " << duration.count() << "s" << endl;
+}
+void spausdinimas(vector<Studentas> &studentai, string filename)
+{
+    auto start = high_resolution_clock::now();
+    ofstream out(filename);
 
     unique_ptr<ostringstream> oss(new ostringstream());
 
@@ -225,16 +224,16 @@ void spausdinimas(vector<Studentas> &studentai)
         }
     }
 
-    //
     out.close();
-    stop = high_resolution_clock::now();
-    duration = stop - start;
-    cout << "Duomenys išvesti per " << duration.count() << "s" << endl;
+    auto stop = high_resolution_clock::now();
+    duration<double> duration = stop - start;
+    cout << "duomenys išvesti per " << duration.count() << "s" << endl;
+    studentai.clear();
 }
 
-double vidurkioSkaiciavimas(Pazymiai &temp)
+float vidurkioSkaiciavimas(Pazymiai &temp)
 {
-    double vidurkis = 0;
+    float vidurkis = 0;
     if (temp.nd.size() != 0)
     {
         int sum = 0;
@@ -245,9 +244,9 @@ double vidurkioSkaiciavimas(Pazymiai &temp)
     return vidurkis * 0.4 + temp.egz * 0.6;
 }
 
-double medianosSkaiciavimas(Pazymiai &temp)
+float medianosSkaiciavimas(Pazymiai &temp)
 {
-    double mediana = 0;
+    float mediana = 0;
 
     if (temp.nd.size() != 0)
     {
@@ -260,12 +259,56 @@ double medianosSkaiciavimas(Pazymiai &temp)
     }
 
     return 0.4 * mediana + 0.6 * temp.egz;
-}
+} 
 
-bool rikiavimoLyginimas(const Studentas &a, const Studentas &b)
+bool compareName(const Studentas &a, const Studentas &b)
 {
     if (a.pavarde == b.pavarde)
         return a.vardas < b.vardas;
     else
         return a.pavarde < b.pavarde;
+}
+
+bool compareGrade(const Studentas &a, const Studentas &b)
+{
+    return a.vidurkis < b.vidurkis;
+}
+
+// void splittinimas(vector<Studentas> &studentai, vector<Studentas> &studPass, vector<Studentas> &studFail)
+// {
+//     auto start = high_resolution_clock::now();
+//     for(auto &a : studentai)
+//     {
+//         if(a.vidurkis<5.0)
+//                 studFail.push_back(a);
+//         else
+//             studPass.push_back(a);
+//     }
+//     auto stop = high_resolution_clock::now();
+//     duration<double> duration = stop - start;
+//     cout << "Duomenys padalinti per " << duration.count() << "s" << endl;
+//     studentai.clear();
+// }
+
+void splittinimas(vector<Studentas> &studentai, vector<Studentas> &studPass)
+{
+    auto start = high_resolution_clock::now();
+    
+    int index;
+    for(int i = 0; i < studentai.size(); i++)
+    {
+            if(studentai.at(i).vidurkis>=5)
+            {
+                index=i;
+                break;
+            }
+    }
+
+    copy(studentai.begin() + index, studentai.end(), std::back_inserter(studPass));
+    studentai.erase(studentai.begin() + index, studentai.end());
+
+    auto stop = high_resolution_clock::now();
+    duration<double> duration = stop - start;
+    cout << "Duomenys padalinti per " << duration.count() << "s" << endl;
+    
 }
