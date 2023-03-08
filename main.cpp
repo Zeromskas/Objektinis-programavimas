@@ -41,7 +41,10 @@ int main()
         }
     }
     else if (ivedimoTipas == 1)
+    {
         pildymasKonsoleje(studentai);
+        start_time = high_resolution_clock::now();
+    }
     else if (ivedimoTipas == 2)
         generuotiAtsitiktinius(studentai);
 

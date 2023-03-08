@@ -348,3 +348,11 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+studentai100k.txt
+studentai10k.txt
+studentai10m.txt
+studentai1k.txt
+studentai1m.txt
+studFail.txt
+studPass.txt
+main
