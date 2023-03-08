@@ -1,6 +1,5 @@
 #include "mylib.h"
 
-
 void pildymasKonsoleje(vector<Studentas> &studentai)
 {
     char testi;
@@ -102,7 +101,6 @@ void generuotiAtsitiktinius(vector<Studentas> &studentai)
         else
             break;
     }
-
     random_device rd;
     mt19937 mt(rd());
     uniform_int_distribution<int> dist(0, 10);

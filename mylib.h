@@ -56,8 +56,6 @@ struct Pazymiai
     int egz = 0;
 };
 
-
-
 float vidurkioSkaiciavimas(Pazymiai &temp);
 float medianosSkaiciavimas(Pazymiai &temp);
 void generuotiAtsitiktinius(vector<Studentas> &studentai);
