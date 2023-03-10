@@ -2,7 +2,6 @@
 
 int main()
 {
-
     vector<Studentas> studentai;
     std::chrono::high_resolution_clock::time_point start_time, end_time;
 
@@ -21,7 +20,6 @@ int main()
 
     if (ivedimoTipas == 0)
     {
-
         while (true)
         {
             try
@@ -52,12 +50,12 @@ int main()
         return 0;
 
     rikiavimas(studentai, "grade");
-    vector<Studentas> studPass;
+    
     // vector<Studentas> studFail;
-    studPass.reserve(studentai.size() / 2);
+    // studPass.reserve(studentai.size() / 2);
     // studFail.reserve(studentai.size() / 2);
     //splittinimas(studentai, studPass, studFail);
-    splittinimas(studentai, studPass);
+    vector<Studentas> studPass=splittinimas(studentai);
     studPass.shrink_to_fit();
     studentai.shrink_to_fit();
     rikiavimas(studentai, "name");

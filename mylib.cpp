@@ -288,7 +288,7 @@ bool compareGrade(const Studentas &a, const Studentas &b)
 //     studentai.clear();
 // }
 
-void splittinimas(vector<Studentas> &studentai, vector<Studentas> &studPass)
+vector<Studentas> splittinimas(vector<Studentas> &studentai)
 {
     auto start = high_resolution_clock::now();
     
@@ -301,12 +301,13 @@ void splittinimas(vector<Studentas> &studentai, vector<Studentas> &studPass)
                 break;
             }
     }
-
-    copy(studentai.begin() + index, studentai.end(), std::back_inserter(studPass));
-    studentai.erase(studentai.begin() + index, studentai.end());
+    vector<Studentas> temp (studentai.begin() + index, studentai.end());
+        // copy(studentai.begin() + index, studentai.end(), std::back_inserter(studPass));
+    studentai.resize(studentai.size()-temp.size());
 
     auto stop = high_resolution_clock::now();
     duration<double> duration = stop - start;
     cout << "Duomenys padalinti per " << duration.count() << "s" << endl;
     
+    return temp;
 }
