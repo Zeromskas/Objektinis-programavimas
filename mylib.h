@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <limits>
 #include <fstream>
-#include <vector>
+#include <list>
 #include <random>
 #include <string>
 #include <chrono>
@@ -36,7 +36,7 @@ using std::swap;
 using std::to_string;
 using std::uniform_int_distribution;
 using std::unique_ptr;
-using std::vector;
+using std::list;
 using std::chrono::duration_cast;
 using std::chrono::high_resolution_clock;
 using std::chrono::seconds;
@@ -52,21 +52,21 @@ struct Studentas
 
 struct Pazymiai
 {
-    vector<int> nd;
+    list<int> nd;
     int egz = 0;
 };
 
 float vidurkioSkaiciavimas(Pazymiai &temp);
 float medianosSkaiciavimas(Pazymiai &temp);
-void generuotiAtsitiktinius(vector<Studentas> &studentai);
-void pildymasKonsoleje(vector<Studentas> &studentai);
-void spausdinimas(vector<Studentas> &studentai, string filename);
-void failoSkaitymas(vector<Studentas> &studentai, string filename);
+void generuotiAtsitiktinius(list<Studentas> &studentai);
+void pildymasKonsoleje(list<Studentas> &studentai);
+void spausdinimas(list<Studentas> &studentai, string filename);
+void failoSkaitymas(list<Studentas> &studentai, string filename);
 void duomenuIvedimas(Studentas &temp);
 bool compareName(const Studentas &a, const Studentas &b);
 bool compareGrade(const Studentas &a, const Studentas &b);
 
-// void splittinimas(vector<Studentas> &studentai, vector<Studentas> &studPass, vector<Studentas> &studFail);
-vector<Studentas> splittinimas(vector<Studentas> &studentai);
+// void splittinimas(list<Studentas> &studentai, list<Studentas> &studPass, list<Studentas> &studFail);
+void splittinimas(list<Studentas> &studentai, list<Studentas> &studFail);
 
-void rikiavimas(vector<Studentas> &studentai, string sortType);
+void rikiavimas(list<Studentas> &studentai, string sortType);

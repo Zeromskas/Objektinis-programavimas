@@ -1,6 +1,6 @@
 #include "mylib.h"
 
-void pildymasKonsoleje(vector<Studentas> &studentai)
+void pildymasKonsoleje(list<Studentas> &studentai)
 {
     char testi;
     Studentas temp;
@@ -69,7 +69,7 @@ void duomenuIvedimas(Studentas &temp)
     cout << "Duomenys įrašyti" << endl;
 }
 
-void generuotiAtsitiktinius(vector<Studentas> &studentai)
+void generuotiAtsitiktinius(list<Studentas> &studentai)
 {
 
     int studentuKiekis = 0;
@@ -107,11 +107,9 @@ void generuotiAtsitiktinius(vector<Studentas> &studentai)
 
     cout << "Duomenys generuojami..." << endl;
 
-    studentai.reserve(studentuKiekis);
 
     Studentas temp;
     Pazymiai pazymiai;
-    pazymiai.nd.reserve(pazymiuKiekis);
 
     for (int i = 0; i < studentuKiekis; i++)
     {
@@ -128,7 +126,7 @@ void generuotiAtsitiktinius(vector<Studentas> &studentai)
     cout << "Generavimas baigtas" << endl;
 }
 
-void failoSkaitymas(vector<Studentas> &studentai, string filename)
+void failoSkaitymas(list<Studentas> &studentai, string filename)
 {
 
     auto start = high_resolution_clock::now();
@@ -148,7 +146,6 @@ void failoSkaitymas(vector<Studentas> &studentai, string filename)
 
     Studentas temp;
     Pazymiai pazymiai;
-    pazymiai.nd.reserve(pazymiuKiekis);
     int p;
 
     while (in >> temp.vardas)
@@ -189,20 +186,15 @@ void failoSkaitymas(vector<Studentas> &studentai, string filename)
     cout << studentai.size() << " studentų" << endl;
     cout<< "Failas nuskaitytas per " << duration.count() << "s." << endl;
 }
-void rikiavimas(vector<Studentas> &studentai, string sortType)
+void rikiavimas(list<Studentas> &studentai, string sortType)
 {
-    auto start = high_resolution_clock::now();
     if (sortType == "name")
-        sort(studentai.begin(), studentai.end(), compareName);
+        studentai.sort( compareName);
     if (sortType == "grade")
-        sort(studentai.begin(), studentai.end(), compareGrade);
-    auto stop = high_resolution_clock::now();
-    duration<double> duration = stop - start;
-    cout << "Sąrašas surikiuotas per " << duration.count() << "s" << endl;
+        studentai.sort(compareGrade);
 }
-void spausdinimas(vector<Studentas> &studentai, string filename)
+void spausdinimas(list<Studentas> &studentai, string filename)
 {
-    auto start = high_resolution_clock::now();
     ofstream out(filename);
 
     unique_ptr<ostringstream> oss(new ostringstream());
@@ -212,9 +204,11 @@ void spausdinimas(vector<Studentas> &studentai, string filename)
     out << oss->str();
     oss->str("");
 
-    for (int i = 0; i < studentai.size(); i++)
-    {
-        (*oss) << setw(15) << left << studentai[i].vardas << setw(20) << left << studentai[i].pavarde << setw(18) << left << setprecision(3) << studentai[i].vidurkis << setw(18) << left << setprecision(3) << studentai[i].mediana << endl;
+    int i=0;
+    for (auto it: studentai)
+    {   
+        (*oss) << setw(15) << left << it.vardas << setw(20) << left << it.pavarde << setw(18) << left << setprecision(3) << it.vidurkis << setw(18) << left << setprecision(3) << it.mediana << endl;
+        i++;
         if ((i + 1) % 10 == 0 || i + 1 == studentai.size())
         {
             out << oss->str();
@@ -223,9 +217,6 @@ void spausdinimas(vector<Studentas> &studentai, string filename)
     }
 
     out.close();
-    auto stop = high_resolution_clock::now();
-    duration<double> duration = stop - start;
-    cout << "duomenys išvesti per " << duration.count() << "s" << endl;
     studentai.clear();
 }
 
@@ -235,8 +226,8 @@ float vidurkioSkaiciavimas(Pazymiai &temp)
     if (temp.nd.size() != 0)
     {
         int sum = 0;
-        for (int i = 0; i < temp.nd.size(); i++)
-            sum = sum + temp.nd[i];
+        for (auto i: temp.nd)
+            sum = sum + i;
         vidurkis = 1.0 * sum / temp.nd.size();
     }
     return vidurkis * 0.4 + temp.egz * 0.6;
@@ -248,12 +239,18 @@ float medianosSkaiciavimas(Pazymiai &temp)
 
     if (temp.nd.size() != 0)
     {
-        sort(temp.nd.begin(), temp.nd.end());
+        temp.nd.sort();
 
         if (temp.nd.size() % 2 == 1)
-            mediana = temp.nd[(temp.nd.size()) / 2];
+        {
+            auto it = std::next(temp.nd.begin(), temp.nd.size() / 2);
+            mediana = *it;
+        }
         else if (temp.nd.size() % 2 == 0)
-            mediana = (temp.nd[(temp.nd.size()) / 2 - 1] + temp.nd[(temp.nd.size()) / 2]) * 1.0 / 2.0;
+        {
+            auto it = std::next(temp.nd.begin(), temp.nd.size() / 2 -1);
+            mediana = (*it + *(std::next(it, 1))) * 1.0 / 2.0;
+        }
     }
 
     return 0.4 * mediana + 0.6 * temp.egz;
@@ -272,7 +269,7 @@ bool compareGrade(const Studentas &a, const Studentas &b)
     return a.vidurkis < b.vidurkis;
 }
 
-// void splittinimas(vector<Studentas> &studentai, vector<Studentas> &studPass, vector<Studentas> &studFail)
+// void splittinimas(list<Studentas> &studentai, list<Studentas> &studPass, list<Studentas> &studFail)
 // {
 //     auto start = high_resolution_clock::now();
 //     for(auto &a : studentai)
@@ -288,26 +285,18 @@ bool compareGrade(const Studentas &a, const Studentas &b)
 //     studentai.clear();
 // }
 
-vector<Studentas> splittinimas(vector<Studentas> &studentai)
+void splittinimas(list<Studentas> &studentai, list<Studentas> &studPass)
 {
     auto start = high_resolution_clock::now();
-    
-    int index;
-    for(int i = 0; i < studentai.size(); i++)
+
+    auto it = std::find_if(studentai.begin(), studentai.end(), [](const auto &s) { return s.vidurkis >= 5; });
+    if (it != studentai.end())
     {
-            if(studentai.at(i).vidurkis>=5)
-            {
-                index=i;
-                break;
-            }
+        studPass.splice(studPass.end(), studentai, it, studentai.end());
     }
-    vector<Studentas> temp (studentai.begin() + index, studentai.end());
-        // copy(studentai.begin() + index, studentai.end(), std::back_inserter(studPass));
-    studentai.resize(studentai.size()-temp.size());
 
     auto stop = high_resolution_clock::now();
     duration<double> duration = stop - start;
     cout << "Duomenys padalinti per " << duration.count() << "s" << endl;
     
-    return temp;
 }
