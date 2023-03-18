@@ -1,5 +1,7 @@
 # v0.5
 
+Greitaveika
+
 | **Vector**       | **1k**    | **10k**  | **100k** | **1M** | **10M** |
 | ---------------- | --------- | -------- | -------- | ------ | ------- |
 | **Nuskaitymas**  | _0.00436_ | _0.0361_ | _0.386_  | _3.56_ | _37.1_  |
@@ -9,7 +11,7 @@
 | **Išvedimas**    | _0.00132_ | _0.0093_ | _0.094_  | _0.82_ | _8.5_   |
 | **Viso**         | _0.00607_ | _0.0498_ | _0.536_  | _5.08_ | _54.0_  |
 
-Perdaryta vietoj vector naudojant deque
+[Perdaryta vietoj vector naudojant deque](https://github.com/Zeromskas/Objektinis-programavimas/tree/v0.5-deque)
 
 | **Deque**        | **1k**    | **10k**  | **100k** | **1M** | **10M** |
 | ---------------- | --------- | -------- | -------- | ------ | ------- |
@@ -20,7 +22,7 @@ Perdaryta vietoj vector naudojant deque
 | **Išvedimas**    | _0.00200_ | _0.0100_ | _0.094_  | _0.99_ | _9.7_   |
 | **Viso**         | _0.00956_ | _0.0643_ | _0.519_  | _5.32_ | _55.3_  |
 
-Perdaryta vietoj vector naudojant list
+[Perdaryta vietoj vector naudojant list](https://github.com/Zeromskas/Objektinis-programavimas/tree/v0.5-list)
 
 | **List**         | **1k**    | **10k**  | **100k** | **1M** | **10M** |
 | ---------------- | --------- | -------- | -------- | ------ | ------- |
@@ -48,7 +50,7 @@ Programos veikimo principas:
 4. Abi dalys surikiuojamos pagal vardą ir pavardę
 5. Abi dalys išvedamos į atskirus failus
 
-Atliktas programos [greitaveikos testavimas](greitaveikosAtaskaita.txt)
+Atliktas programos [greitaveikos testavimas](https://github.com/Zeromskas/Objektinis-programavimas/blob/v0.4/greitaveikosAtaskaita.txt)
 
 |                  | **1k**    | **10k**  | **100k** | **1M** | **10M** |
 | ---------------- | --------- | -------- | -------- | ------ | ------- |
