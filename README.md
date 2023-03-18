@@ -1,6 +1,17 @@
 # v0.5
 
-Pridetas testavimo režimas generuojantis greitaveikos lentelę
+
+
+1. Pridetas testavimo režimas generuojantis greitaveikos lentelę
+2. [Perdaryta vietoj vector naudojant deque](https://github.com/Zeromskas/Objektinis-programavimas/tree/v0.5-deque)
+3. [Perdaryta vietoj vector naudojant list](https://github.com/Zeromskas/Objektinis-programavimas/tree/v0.5-list)
+
+Testavimai atlikti naudojant 
+MacBook Pro 2020
+- CPU – 1,4 GHz Quad-Core Intel Core i5- 8257U 
+-	RAM - 8GB LPDDR3 2133 MHz 
+- SSD - Read: 1560MB/s Write: 1840MB/s
+
 
 | **Vector**       | **1k**    | **10k**  | **100k** | **1M** | **10M** |
 | ---------------- | --------- | -------- | -------- | ------ | ------- |
@@ -11,7 +22,6 @@ Pridetas testavimo režimas generuojantis greitaveikos lentelę
 | **Išvedimas**    | _0.00132_ | _0.0093_ | _0.094_  | _0.82_ | _8.5_   |
 | **Viso**         | _0.00607_ | _0.0498_ | _0.536_  | _5.08_ | _54.0_  |
 
-[Perdaryta vietoj vector naudojant deque](https://github.com/Zeromskas/Objektinis-programavimas/tree/v0.5-deque)
 
 | **Deque**        | **1k**    | **10k**  | **100k** | **1M** | **10M** |
 | ---------------- | --------- | -------- | -------- | ------ | ------- |
@@ -22,7 +32,6 @@ Pridetas testavimo režimas generuojantis greitaveikos lentelę
 | **Išvedimas**    | _0.00200_ | _0.0100_ | _0.094_  | _0.99_ | _9.7_   |
 | **Viso**         | _0.00956_ | _0.0643_ | _0.519_  | _5.32_ | _55.3_  |
 
-[Perdaryta vietoj vector naudojant list](https://github.com/Zeromskas/Objektinis-programavimas/tree/v0.5-list)
 
 | **List**         | **1k**    | **10k**  | **100k** | **1M** | **10M** |
 | ---------------- | --------- | -------- | -------- | ------ | ------- |
