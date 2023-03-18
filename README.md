@@ -1,23 +1,59 @@
+# v0.5
+
+Greitaveika
+
+| **Vector**       | **1k**    | **10k**  | **100k** | **1M** | **10M** |
+| ---------------- | --------- | -------- | -------- | ------ | ------- |
+| **Nuskaitymas**  | _0.00436_ | _0.0361_ | _0.386_  | _3.56_ | _37.1_  |
+| **Rikiavimas 1** | _0.00008_ | _0.0007_ | _0.007_  | _0.07_ | _0.8_   |
+| **Dalinimas**    | _0.00002_ | _0.0000_ | _0.001_  | _0.01_ | _0.2_   |
+| **Rikiavimas 2** | _0.00027_ | _0.0034_ | _0.047_  | _0.60_ | _7.1_   |
+| **Išvedimas**    | _0.00132_ | _0.0093_ | _0.094_  | _0.82_ | _8.5_   |
+| **Viso**         | _0.00607_ | _0.0498_ | _0.536_  | _5.08_ | _54.0_  |
+
+[Perdaryta vietoj vector naudojant deque](https://github.com/Zeromskas/Objektinis-programavimas/tree/v0.5-deque)
+
+| **Deque**        | **1k**    | **10k**  | **100k** | **1M** | **10M** |
+| ---------------- | --------- | -------- | -------- | ------ | ------- |
+| **Nuskaitymas**  | _0.00692_ | _0.0493_ | _0.366_  | _3.62_ | _37.0_  |
+| **Rikiavimas 1** | _0.00013_ | _0.0008_ | _0.008_  | _0.08_ | _1.3_   |
+| **Dalinimas**    | _0.00003_ | _0.0002_ | _0.002_  | _0.02_ | _0.3_   |
+| **Rikiavimas 2** | _0.00036_ | _0.0039_ | _0.048_  | _0.60_ | _7.0_   |
+| **Išvedimas**    | _0.00200_ | _0.0100_ | _0.094_  | _0.99_ | _9.7_   |
+| **Viso**         | _0.00956_ | _0.0643_ | _0.519_  | _5.32_ | _55.3_  |
+
+[Perdaryta vietoj vector naudojant list](https://github.com/Zeromskas/Objektinis-programavimas/tree/v0.5-list)
+
+| **List**         | **1k**    | **10k**  | **100k** | **1M** | **10M** |
+| ---------------- | --------- | -------- | -------- | ------ | ------- |
+| **Nuskaitymas**  | _0.01089_ | _0.0470_ | _0.454_  | _4.52_ | _44.3_  |
+| **Rikiavimas 1** | _0.00012_ | _0.0010_ | _0.019_  | _0.47_ | _9.2_   |
+| **Dalinimas**    | _0.00001_ | _0.0001_ | _0.004_  | _0.09_ | _1.3_   |
+| **Rikiavimas 2** | _0.00028_ | _0.0029_ | _0.051_  | _0.95_ | _16.9_  |
+| **Išvedimas**    | _0.00214_ | _0.0090_ | _0.117_  | _1.03_ | _9.2_   |
+| **Viso**         | _0.01354_ | _0.0602_ | _0.647_  | _7.06_ | _81.0_  |
+
 # v0.4
 
 1. Pridėta studentų pažymių failus generuojanti programa.
 2. Pridėtas bendras ir atskirų programos dalių vykdymo laiko skaičiavimas.
 3. Patobulinta studentų sarašo rikiavimo funkcija (pridėta galimybė pasirinkti rikiuoti pagal vardus arba pagal galutinius įvertinimus).
 4. Pridėta studento sarašo dalinimo į dvi dalis (Pass ir Fail) funkcija.
-6. Rezultatas gaunamas kaip 2 atskiri failai ("studPass.txt", "studFail.txt").
-7. Optimizuotas RAM naudojimas.
+5. Rezultatas gaunamas kaip 2 atskiri failai ("studPass.txt", "studFail.txt").
+6. Optimizuotas RAM naudojimas.
 
-Programos veikimo principas: 
+Programos veikimo principas:
+
 1. Nuskaitomi studentų duomenys iš pasirinkto failo
 2. Studentų sąrašas surikiuojamas pagal galutinius pažymius didėjimo tvarka
 3. Sąrašas padalinamas į dvi dalis (<5 ir >=5)
 4. Abi dalys surikiuojamos pagal vardą ir pavardę
 5. Abi dalys išvedamos į atskirus failus
 
-Atliktas programos [greitaveikos testavimas](greitaveikosAtaskaita.txt)
+Atliktas programos [greitaveikos testavimas](https://github.com/Zeromskas/Objektinis-programavimas/blob/v0.4/greitaveikosAtaskaita.txt)
 
 |                  | **1k**    | **10k**  | **100k** | **1M** | **10M** |
-|------------------|-----------|----------|----------|--------|---------|
+| ---------------- | --------- | -------- | -------- | ------ | ------- |
 | **Nuskaitymas**  | _0.00919_ | _0.0440_ | _0.354_  | _3.37_ | _34.7_  |
 | **Rikiavimas 1** | _0.00015_ | _0.0007_ | _0.007_  | _0.07_ | _0.8_   |
 | **Dalinimas**    | _0.00003_ | _0.0002_ | _0.003_  | _0.03_ | _0.4_   |
@@ -45,6 +81,7 @@ Atliktas programos [greitaveikos testavimas](greitaveikosAtaskaita.txt)
 5. Duomenys išvedami į failą "rez.txt", bereikalingai neapkraunant konsolės
 
 # v0.1
+
 1.  Programa nuskaito vartotojo įvedamus duomenis: studento vardą ir pavardę.
 2.  Leidžia įvesti pažymius ranka, arba generuoti atsitiktinius.
 3.  Ranka vedamų pažymių kiekis neribojamas, atsitiktinai generuojant pazymius sugeneruojami 0-20 pažymių. Pažymiai privalo būti dešimtbalėje sistemoje (_0-10_)

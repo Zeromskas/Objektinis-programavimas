@@ -51,10 +51,6 @@ int main()
 
     rikiavimas(studentai, "grade");
     
-    // vector<Studentas> studFail;
-    // studPass.reserve(studentai.size() / 2);
-    // studFail.reserve(studentai.size() / 2);
-    //splittinimas(studentai, studPass, studFail);
     vector<Studentas> studPass=splittinimas(studentai);
     studPass.shrink_to_fit();
     studentai.shrink_to_fit();
