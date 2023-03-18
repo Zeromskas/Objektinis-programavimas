@@ -1,6 +1,6 @@
 #include "mylib.h"
 
-void pildymasKonsoleje(vector<Studentas> &studentai)
+void pildymasKonsoleje(deque<Studentas> &studentai)
 {
     char testi;
     Studentas temp;
@@ -69,7 +69,7 @@ void duomenuIvedimas(Studentas &temp)
     cout << "Duomenys įrašyti" << endl;
 }
 
-void generuotiAtsitiktinius(vector<Studentas> &studentai)
+void generuotiAtsitiktinius(deque<Studentas> &studentai)
 {
 
     int studentuKiekis = 0;
@@ -107,11 +107,9 @@ void generuotiAtsitiktinius(vector<Studentas> &studentai)
 
     cout << "Duomenys generuojami..." << endl;
 
-    studentai.reserve(studentuKiekis);
 
     Studentas temp;
     Pazymiai pazymiai;
-    pazymiai.nd.reserve(pazymiuKiekis);
 
     for (int i = 0; i < studentuKiekis; i++)
     {
@@ -128,7 +126,7 @@ void generuotiAtsitiktinius(vector<Studentas> &studentai)
     cout << "Generavimas baigtas" << endl;
 }
 
-void failoSkaitymas(vector<Studentas> &studentai, string filename)
+void failoSkaitymas(deque<Studentas> &studentai, string filename)
 {
 
     auto start = high_resolution_clock::now();
@@ -148,7 +146,6 @@ void failoSkaitymas(vector<Studentas> &studentai, string filename)
 
     Studentas temp;
     Pazymiai pazymiai;
-    pazymiai.nd.reserve(pazymiuKiekis);
     int p;
 
     while (in >> temp.vardas)
@@ -189,20 +186,15 @@ void failoSkaitymas(vector<Studentas> &studentai, string filename)
     cout << studentai.size() << " studentų" << endl;
     cout<< "Failas nuskaitytas per " << duration.count() << "s." << endl;
 }
-void rikiavimas(vector<Studentas> &studentai, string sortType)
+void rikiavimas(deque<Studentas> &studentai, string sortType)
 {
-    auto start = high_resolution_clock::now();
     if (sortType == "name")
         sort(studentai.begin(), studentai.end(), compareName);
     if (sortType == "grade")
         sort(studentai.begin(), studentai.end(), compareGrade);
-    auto stop = high_resolution_clock::now();
-    duration<double> duration = stop - start;
-    cout << "Sąrašas surikiuotas per " << duration.count() << "s" << endl;
 }
-void spausdinimas(vector<Studentas> &studentai, string filename)
+void spausdinimas(deque<Studentas> &studentai, string filename)
 {
-    auto start = high_resolution_clock::now();
     ofstream out(filename);
 
     unique_ptr<ostringstream> oss(new ostringstream());
@@ -223,9 +215,6 @@ void spausdinimas(vector<Studentas> &studentai, string filename)
     }
 
     out.close();
-    auto stop = high_resolution_clock::now();
-    duration<double> duration = stop - start;
-    cout << "duomenys išvesti per " << duration.count() << "s" << endl;
     studentai.clear();
 }
 
@@ -272,7 +261,7 @@ bool compareGrade(const Studentas &a, const Studentas &b)
     return a.vidurkis < b.vidurkis;
 }
 
-// void splittinimas(vector<Studentas> &studentai, vector<Studentas> &studPass, vector<Studentas> &studFail)
+// void splittinimas(deque<Studentas> &studentai, deque<Studentas> &studPass, deque<Studentas> &studFail)
 // {
 //     auto start = high_resolution_clock::now();
 //     for(auto &a : studentai)
@@ -288,7 +277,7 @@ bool compareGrade(const Studentas &a, const Studentas &b)
 //     studentai.clear();
 // }
 
-vector<Studentas> splittinimas(vector<Studentas> &studentai)
+deque<Studentas> splittinimas(deque<Studentas> &studentai)
 {
     auto start = high_resolution_clock::now();
     
@@ -301,7 +290,7 @@ vector<Studentas> splittinimas(vector<Studentas> &studentai)
                 break;
             }
     }
-    vector<Studentas> temp (studentai.begin() + index, studentai.end());
+    deque<Studentas> temp (studentai.begin() + index, studentai.end());
         // copy(studentai.begin() + index, studentai.end(), std::back_inserter(studPass));
     studentai.resize(studentai.size()-temp.size());
 
