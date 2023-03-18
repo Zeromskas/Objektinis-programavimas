@@ -1,27 +1,23 @@
 # v0.5
 
-
-
 1. Pridetas testavimo režimas generuojantis greitaveikos lentelę
 2. [Perdaryta vietoj vector naudojant deque](https://github.com/Zeromskas/Objektinis-programavimas/tree/v0.5-deque)
 3. [Perdaryta vietoj vector naudojant list](https://github.com/Zeromskas/Objektinis-programavimas/tree/v0.5-list)
 
-Testavimai atlikti naudojant 
+Testavimai atlikti naudojant
 MacBook Pro 2020
-- CPU – 1,4 GHz Quad-Core Intel Core i5- 8257U 
--	RAM - 8GB LPDDR3 2133 MHz 
+- CPU – 1,4 GHz Quad-Core Intel Core i5- 8257U
+- RAM - 8GB LPDDR3 2133 MHz
 - SSD - Read: 1560MB/s Write: 1840MB/s
-
 
 | **Vector**       | **1k**    | **10k**  | **100k** | **1M** | **10M** |
 | ---------------- | --------- | -------- | -------- | ------ | ------- |
-| **Nuskaitymas**  | _0.00436_ | _0.0361_ | _0.386_  | _3.56_ | _37.1_  |
-| **Rikiavimas 1** | _0.00008_ | _0.0007_ | _0.007_  | _0.07_ | _0.8_   |
+| **Nuskaitymas**  | _0.00452_ | _0.0382_ | _0.362_  | _3.45_ | _34.6_  |
+| **Rikiavimas 1** | _0.00008_ | _0.0007_ | _0.006_  | _0.07_ | _0.8_   |
 | **Dalinimas**    | _0.00002_ | _0.0000_ | _0.001_  | _0.01_ | _0.2_   |
-| **Rikiavimas 2** | _0.00027_ | _0.0034_ | _0.047_  | _0.60_ | _7.1_   |
-| **Išvedimas**    | _0.00132_ | _0.0093_ | _0.094_  | _0.82_ | _8.5_   |
-| **Viso**         | _0.00607_ | _0.0498_ | _0.536_  | _5.08_ | _54.0_  |
-
+| **Rikiavimas 2** | _0.00025_ | _0.0036_ | _0.046_  | _0.58_ | _6.6_   |
+| **Išvedimas**    | _0.00127_ | _0.0090_ | _0.091_  | _0.80_ | _8.1_   |
+| **Viso**         | _0.00616_ | _0.0517_ | _0.507_  | _4.93_ | _50.6_  |
 
 | **Deque**        | **1k**    | **10k**  | **100k** | **1M** | **10M** |
 | ---------------- | --------- | -------- | -------- | ------ | ------- |
@@ -31,7 +27,6 @@ MacBook Pro 2020
 | **Rikiavimas 2** | _0.00036_ | _0.0039_ | _0.048_  | _0.60_ | _7.0_   |
 | **Išvedimas**    | _0.00200_ | _0.0100_ | _0.094_  | _0.99_ | _9.7_   |
 | **Viso**         | _0.00956_ | _0.0643_ | _0.519_  | _5.32_ | _55.3_  |
-
 
 | **List**         | **1k**    | **10k**  | **100k** | **1M** | **10M** |
 | ---------------- | --------- | -------- | -------- | ------ | ------- |
