@@ -1,3 +1,5 @@
+# v0.5
+
 # v0.4
 
 1. Pridėta studentų pažymių failus generuojanti programa.
