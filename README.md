@@ -1,6 +1,6 @@
 # v0.5
 
-Greitaveika
+Pridetas testavimo režimas generuojantis greitaveikos lentelę
 
 | **Vector**       | **1k**    | **10k**  | **100k** | **1M** | **10M** |
 | ---------------- | --------- | -------- | -------- | ------ | ------- |
