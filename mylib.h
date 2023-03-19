@@ -15,8 +15,10 @@ using std::cin;
 using std::copy;
 using std::count;
 using std::cout;
+using std::deque;
 using std::endl;
 using std::exception;
+using std::fixed;
 using std::getline;
 using std::ifstream;
 using std::left;
@@ -36,12 +38,11 @@ using std::swap;
 using std::to_string;
 using std::uniform_int_distribution;
 using std::unique_ptr;
-using std::deque;
+using std::chrono::duration;
 using std::chrono::duration_cast;
 using std::chrono::high_resolution_clock;
-using std::chrono::seconds;
 using std::chrono::milliseconds;
-using std::chrono::duration;
+using std::chrono::seconds;
 
 struct Studentas
 {

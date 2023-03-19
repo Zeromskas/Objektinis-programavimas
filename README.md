@@ -1,14 +1,15 @@
 # v0.5
+
 Perdaryta vietoj vector naudojant deque
 
 |                  | **1k**    | **10k**  | **100k** | **1M** | **10M** |
-|------------------|-----------|----------|----------|--------|---------|
-| **Nuskaitymas**  | _0.00692_ | _0.0493_ | _0.366_  | _3.62_ | _37.0_  |
+| ---------------- | --------- | -------- | -------- | ------ | ------- |
+| **Nuskaitymas**  | _0.00479_ | _0.0381_ | _0.369_  | _3.52_ | _34.8_  |
 | **Rikiavimas 1** | _0.00013_ | _0.0008_ | _0.008_  | _0.08_ | _1.3_   |
 | **Dalinimas**    | _0.00003_ | _0.0002_ | _0.002_  | _0.02_ | _0.3_   |
-| **Rikiavimas 2** | _0.00036_ | _0.0039_ | _0.048_  | _0.60_ | _7.0_   |
-| **Išvedimas**    | _0.00200_ | _0.0100_ | _0.094_  | _0.99_ | _9.7_   |
-| **Viso**         | _0.00956_ | _0.0643_ | _0.519_  | _5.32_ | _55.3_  |
+| **Rikiavimas 2** | _0.00030_ | _0.0034_ | _0.047_  | _0.57_ | _6.6_   |
+| **Išvedimas**    | _0.00148_ | _0.0093_ | _0.088_  | _0.81_ | _8.5_   |
+| **Viso**         | _0.00673_ | _0.0518_ | _0.514_  | _5.00_ | _51.6_  |
 
 # v0.4
 
@@ -16,10 +17,11 @@ Perdaryta vietoj vector naudojant deque
 2. Pridėtas bendras ir atskirų programos dalių vykdymo laiko skaičiavimas.
 3. Patobulinta studentų sarašo rikiavimo funkcija (pridėta galimybė pasirinkti rikiuoti pagal vardus arba pagal galutinius įvertinimus).
 4. Pridėta studento sarašo dalinimo į dvi dalis (Pass ir Fail) funkcija.
-6. Rezultatas gaunamas kaip 2 atskiri failai ("studPass.txt", "studFail.txt").
-7. Optimizuotas RAM naudojimas.
+5. Rezultatas gaunamas kaip 2 atskiri failai ("studPass.txt", "studFail.txt").
+6. Optimizuotas RAM naudojimas.
 
-Programos veikimo principas: 
+Programos veikimo principas:
+
 1. Nuskaitomi studentų duomenys iš pasirinkto failo
 2. Studentų sąrašas surikiuojamas pagal galutinius pažymius didėjimo tvarka
 3. Sąrašas padalinamas į dvi dalis (<5 ir >=5)
@@ -29,7 +31,7 @@ Programos veikimo principas:
 Atliktas programos [greitaveikos testavimas](greitaveikosAtaskaita.txt)
 
 |                  | **1k**    | **10k**  | **100k** | **1M** | **10M** |
-|------------------|-----------|----------|----------|--------|---------|
+| ---------------- | --------- | -------- | -------- | ------ | ------- |
 | **Nuskaitymas**  | _0.00919_ | _0.0440_ | _0.354_  | _3.37_ | _34.7_  |
 | **Rikiavimas 1** | _0.00015_ | _0.0007_ | _0.007_  | _0.07_ | _0.8_   |
 | **Dalinimas**    | _0.00003_ | _0.0002_ | _0.003_  | _0.03_ | _0.4_   |
@@ -57,6 +59,7 @@ Atliktas programos [greitaveikos testavimas](greitaveikosAtaskaita.txt)
 5. Duomenys išvedami į failą "rez.txt", bereikalingai neapkraunant konsolės
 
 # v0.1
+
 1.  Programa nuskaito vartotojo įvedamus duomenis: studento vardą ir pavardę.
 2.  Leidžia įvesti pažymius ranka, arba generuoti atsitiktinius.
 3.  Ranka vedamų pažymių kiekis neribojamas, atsitiktinai generuojant pazymius sugeneruojami 0-20 pažymių. Pažymiai privalo būti dešimtbalėje sistemoje (_0-10_)
