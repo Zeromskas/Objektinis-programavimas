@@ -42,6 +42,7 @@ using std::chrono::high_resolution_clock;
 using std::chrono::seconds;
 using std::chrono::milliseconds;
 using std::chrono::duration;
+using std::fixed;
 
 struct Studentas
 {
