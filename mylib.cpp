@@ -260,16 +260,18 @@ bool compareGrade(const Studentas &a, const Studentas &b)
 vector<Studentas> splittinimas(vector<Studentas> &studentai)
 {
     
-    int index;
-    for(int i = 0; i < studentai.size(); i++)
-    {
-            if(studentai.at(i).vidurkis>=5)
-            {
-                index=i;
-                break;
-            }
-    }
-    vector<Studentas> temp (studentai.begin() + index, studentai.end());
+    // int index;
+    // for(int i = 0; i < studentai.size(); i++)
+    // {
+    //         if(studentai.at(i).vidurkis>=5)
+    //         {
+    //             index=i;
+    //             break;
+    //         }
+    // }
+    auto it = std::find_if(studentai.begin(), studentai.end(), [](const auto &s) { return s.vidurkis >= 5; });
+
+    vector<Studentas> temp (it, studentai.end());
         // copy(studentai.begin() + index, studentai.end(), std::back_inserter(studPass));
     studentai.resize(studentai.size()-temp.size());
   
