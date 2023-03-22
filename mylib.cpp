@@ -125,7 +125,6 @@ void generuotiAtsitiktinius(vector<Studentas> &studentai)
         pazymiai.nd.clear();
         studentai.push_back(temp);
     }
-    cout << "Generavimas baigtas" << endl;
 }
 
 void failoSkaitymas(vector<Studentas> &studentai, string filename)
@@ -136,7 +135,7 @@ void failoSkaitymas(vector<Studentas> &studentai, string filename)
     {
         throw runtime_error("Nepavyko atidaryti failo!");
     }
-
+    cout<<filename<<endl;
     cout << "Duomenys nuskaitomi..." << endl;
 
     string line;
@@ -180,10 +179,10 @@ void failoSkaitymas(vector<Studentas> &studentai, string filename)
     // }
 
     in.close();
-    cout<< "Duomenys nuskaityti." << endl;
 }
 void rikiavimas(vector<Studentas> &studentai, string sortType)
 {
+    cout<<"Duomenys rikiuojami pagal "<<sortType<<endl;
     if (sortType == "name")
         sort(studentai.begin(), studentai.end(), compareName);
     if (sortType == "grade")
@@ -191,6 +190,8 @@ void rikiavimas(vector<Studentas> &studentai, string sortType)
 }
 void spausdinimas(vector<Studentas> &studentai, string filename)
 {
+    cout<<"Duomenys išvedami..."<<endl;
+
     ofstream out(filename);
 
     unique_ptr<ostringstream> oss(new ostringstream());
@@ -259,20 +260,9 @@ bool compareGrade(const Studentas &a, const Studentas &b)
 
 vector<Studentas> splittinimas(vector<Studentas> &studentai)
 {
-    
-    // int index;
-    // for(int i = 0; i < studentai.size(); i++)
-    // {
-    //         if(studentai.at(i).vidurkis>=5)
-    //         {
-    //             index=i;
-    //             break;
-    //         }
-    // }
     auto it = std::find_if(studentai.begin(), studentai.end(), [](const auto &s) { return s.vidurkis >= 5; });
 
     vector<Studentas> temp (it, studentai.end());
-        // copy(studentai.begin() + index, studentai.end(), std::back_inserter(studPass));
     studentai.resize(studentai.size()-temp.size());
   
     return temp;
