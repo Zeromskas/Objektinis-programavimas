@@ -128,9 +128,6 @@ void generuotiAtsitiktinius(list<Studentas> &studentai)
 
 void failoSkaitymas(list<Studentas> &studentai, string filename)
 {
-
-    auto start = high_resolution_clock::now();
-
     ifstream in(filename);
 
     if (!in.is_open())
@@ -138,6 +135,7 @@ void failoSkaitymas(list<Studentas> &studentai, string filename)
         throw runtime_error("Nepavyko atidaryti failo!");
     }
 
+    cout<<filename<<endl;
     cout << "Duomenys nuskaitomi..." << endl;
 
     string line;
@@ -163,31 +161,11 @@ void failoSkaitymas(list<Studentas> &studentai, string filename)
         studentai.push_back(temp);
     }
 
-    // while (std::getline(in, line))
-    // {
-    //     std::stringstream ss(line);
-    //     ss >> temp.vardas >> temp.pavarde;
-    //     for (int i = 0; i < pazymiuKiekis; i++)
-    //     {
-    //         ss>>p;
-    //         pazymiai.nd.push_back(p);
-    //     }
-    //     ss >> pazymiai.egz;
-    //     temp.vidurkis = vidurkioSkaiciavimas(pazymiai);
-    //     temp.mediana = medianosSkaiciavimas(pazymiai);
-    //     pazymiai.nd.clear();
-    //     studentai.push_back(temp);
-    // }
-
     in.close();
-    auto stop = high_resolution_clock::now();
-    duration<double> duration = stop - start;
-
-    cout << studentai.size() << " studentų" << endl;
-    cout<< "Failas nuskaitytas per " << duration.count() << "s." << endl;
 }
 void rikiavimas(list<Studentas> &studentai, string sortType)
 {
+    cout<<"Duomenys rikiuojami pagal "<<sortType<<endl;
     if (sortType == "name")
         studentai.sort( compareName);
     if (sortType == "grade")
@@ -195,6 +173,7 @@ void rikiavimas(list<Studentas> &studentai, string sortType)
 }
 void spausdinimas(list<Studentas> &studentai, string filename)
 {
+    cout<<"Duomenys spausdinami..."<<endl;
     ofstream out(filename);
 
     unique_ptr<ostringstream> oss(new ostringstream());
@@ -269,34 +248,12 @@ bool compareGrade(const Studentas &a, const Studentas &b)
     return a.vidurkis < b.vidurkis;
 }
 
-// void splittinimas(list<Studentas> &studentai, list<Studentas> &studPass, list<Studentas> &studFail)
-// {
-//     auto start = high_resolution_clock::now();
-//     for(auto &a : studentai)
-//     {
-//         if(a.vidurkis<5.0)
-//                 studFail.push_back(a);
-//         else
-//             studPass.push_back(a);
-//     }
-//     auto stop = high_resolution_clock::now();
-//     duration<double> duration = stop - start;
-//     cout << "Duomenys padalinti per " << duration.count() << "s" << endl;
-//     studentai.clear();
-// }
-
 void splittinimas(list<Studentas> &studentai, list<Studentas> &studPass)
 {
-    auto start = high_resolution_clock::now();
-
+    cout<<"Duomenys dalinami"<<endl;
     auto it = std::find_if(studentai.begin(), studentai.end(), [](const auto &s) { return s.vidurkis >= 5; });
     if (it != studentai.end())
     {
         studPass.splice(studPass.end(), studentai, it, studentai.end());
     }
-
-    auto stop = high_resolution_clock::now();
-    duration<double> duration = stop - start;
-    cout << "Duomenys padalinti per " << duration.count() << "s" << endl;
-    
 }

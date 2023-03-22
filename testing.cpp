@@ -8,7 +8,7 @@ int main()
     duration<double> dur;
     double duration[5][6];
 
-    string filenames[5]{"studentai1k.txt", "studentai10k.txt", "studentai100k.txt", "studentai1M.txt", "studentai10M.txt"};
+    string filenames[4]{"studentai1k.txt", "studentai10k.txt", "studentai100k.txt", "studentai1M.txt"};
 
     int i = 0;
     for (auto filename : filenames)
