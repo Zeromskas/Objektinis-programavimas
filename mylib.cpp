@@ -107,7 +107,6 @@ void generuotiAtsitiktinius(deque<Studentas> &studentai)
 
     cout << "Duomenys generuojami..." << endl;
 
-
     Studentas temp;
     Pazymiai pazymiai;
 
@@ -123,14 +122,10 @@ void generuotiAtsitiktinius(deque<Studentas> &studentai)
         pazymiai.nd.clear();
         studentai.push_back(temp);
     }
-    cout << "Generavimas baigtas" << endl;
 }
 
 void failoSkaitymas(deque<Studentas> &studentai, string filename)
 {
-
-    auto start = high_resolution_clock::now();
-
     ifstream in(filename);
 
     if (!in.is_open())
@@ -138,6 +133,7 @@ void failoSkaitymas(deque<Studentas> &studentai, string filename)
         throw runtime_error("Nepavyko atidaryti failo!");
     }
 
+    cout<<filename<<endl;
     cout << "Duomenys nuskaitomi..." << endl;
 
     string line;
@@ -163,31 +159,11 @@ void failoSkaitymas(deque<Studentas> &studentai, string filename)
         studentai.push_back(temp);
     }
 
-    // while (std::getline(in, line))
-    // {
-    //     std::stringstream ss(line);
-    //     ss >> temp.vardas >> temp.pavarde;
-    //     for (int i = 0; i < pazymiuKiekis; i++)
-    //     {
-    //         ss>>p;
-    //         pazymiai.nd.push_back(p);
-    //     }
-    //     ss >> pazymiai.egz;
-    //     temp.vidurkis = vidurkioSkaiciavimas(pazymiai);
-    //     temp.mediana = medianosSkaiciavimas(pazymiai);
-    //     pazymiai.nd.clear();
-    //     studentai.push_back(temp);
-    // }
-
     in.close();
-    auto stop = high_resolution_clock::now();
-    duration<double> duration = stop - start;
-
-    cout << studentai.size() << " studentų" << endl;
-    cout<< "Failas nuskaitytas per " << duration.count() << "s." << endl;
 }
 void rikiavimas(deque<Studentas> &studentai, string sortType)
 {
+    cout<<"Duomenys rikiuojami pagal "<<sortType<<endl;
     if (sortType == "name")
         sort(studentai.begin(), studentai.end(), compareName);
     if (sortType == "grade")
@@ -195,6 +171,7 @@ void rikiavimas(deque<Studentas> &studentai, string sortType)
 }
 void spausdinimas(deque<Studentas> &studentai, string filename)
 {
+    cout<<"Duomenys išvedami..."<<endl;
     ofstream out(filename);
 
     unique_ptr<ostringstream> oss(new ostringstream());
@@ -261,42 +238,15 @@ bool compareGrade(const Studentas &a, const Studentas &b)
     return a.vidurkis < b.vidurkis;
 }
 
-// void splittinimas(deque<Studentas> &studentai, deque<Studentas> &studPass, deque<Studentas> &studFail)
-// {
-//     auto start = high_resolution_clock::now();
-//     for(auto &a : studentai)
-//     {
-//         if(a.vidurkis<5.0)
-//                 studFail.push_back(a);
-//         else
-//             studPass.push_back(a);
-//     }
-//     auto stop = high_resolution_clock::now();
-//     duration<double> duration = stop - start;
-//     cout << "Duomenys padalinti per " << duration.count() << "s" << endl;
-//     studentai.clear();
-// }
-
 deque<Studentas> splittinimas(deque<Studentas> &studentai)
 {
-    auto start = high_resolution_clock::now();
+    cout<<"Dalinama į grupes.."<<endl;
     
-    int index;
-    for(int i = 0; i < studentai.size(); i++)
-    {
-            if(studentai.at(i).vidurkis>=5)
-            {
-                index=i;
-                break;
-            }
-    }
-    deque<Studentas> temp (studentai.begin() + index, studentai.end());
-        // copy(studentai.begin() + index, studentai.end(), std::back_inserter(studPass));
-    studentai.resize(studentai.size()-temp.size());
+    auto it = std::find_if(studentai.begin(), studentai.end(), [](const auto &s) { return s.vidurkis >= 5; });
 
-    auto stop = high_resolution_clock::now();
-    duration<double> duration = stop - start;
-    cout << "Duomenys padalinti per " << duration.count() << "s" << endl;
+    deque<Studentas> temp (it, studentai.end());
+
+    studentai.resize(studentai.size()-temp.size());
     
     return temp;
 }
