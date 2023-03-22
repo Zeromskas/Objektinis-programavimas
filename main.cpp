@@ -57,12 +57,10 @@ int main()
     rikiavimas(studentai, "name");
     rikiavimas(studPass, "name");
 
-    cout << "Pass ";
+
     spausdinimas(studPass, "studPass.txt");
     studPass.clear();
-    cout << "Fail ";
     spausdinimas(studentai, "studFail.txt");
-
     studentai.clear();
     
 
@@ -70,7 +68,6 @@ int main()
 
     duration<double> duration = end_time - start_time;
 
-    cout << "Failo apdorojimas užtruko " << duration.count() << "s." << endl;
 
     return 0;
 }
