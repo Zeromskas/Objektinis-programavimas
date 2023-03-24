@@ -180,14 +180,16 @@ void failoSkaitymas(vector<Studentas> &studentai, string filename)
 
     in.close();
 }
+
 void rikiavimas(vector<Studentas> &studentai, string sortType)
 {
     cout<<"Duomenys rikiuojami pagal "<<sortType<<endl;
     if (sortType == "name")
         sort(studentai.begin(), studentai.end(), compareName);
-    if (sortType == "grade")
+    else if (sortType == "grade")
         sort(studentai.begin(), studentai.end(), compareGrade);
 }
+
 void spausdinimas(vector<Studentas> &studentai, string filename)
 {
     cout<<"Duomenys išvedami..."<<endl;
@@ -217,14 +219,8 @@ void spausdinimas(vector<Studentas> &studentai, string filename)
 
 float vidurkioSkaiciavimas(Pazymiai &temp)
 {
-    float vidurkis = 0;
-    if (temp.nd.size() != 0)
-    {
-        int sum = 0;
-        for (int i = 0; i < temp.nd.size(); i++)
-            sum = sum + temp.nd[i];
-        vidurkis = 1.0 * sum / temp.nd.size();
-    }
+    float vidurkis;
+    vidurkis = temp.nd.size() != 0 ? accumulate(temp.nd.begin(), temp.nd.end(), 0.0) / temp.nd.size() : 0.0;
     return vidurkis * 0.4 + temp.egz * 0.6;
 }
 
@@ -235,13 +231,8 @@ float medianosSkaiciavimas(Pazymiai &temp)
     if (temp.nd.size() != 0)
     {
         sort(temp.nd.begin(), temp.nd.end());
-
-        if (temp.nd.size() % 2 == 1)
-            mediana = temp.nd[(temp.nd.size()) / 2];
-        else if (temp.nd.size() % 2 == 0)
-            mediana = (temp.nd[(temp.nd.size()) / 2 - 1] + temp.nd[(temp.nd.size()) / 2]) * 1.0 / 2.0;
+        mediana = temp.nd.size() % 2 == 1 ? temp.nd[(temp.nd.size()) / 2] : (temp.nd[(temp.nd.size()) / 2 - 1] + temp.nd[(temp.nd.size()) / 2]) * 1.0 / 2.0;
     }
-
     return 0.4 * mediana + 0.6 * temp.egz;
 } 
 
@@ -260,10 +251,10 @@ bool compareGrade(const Studentas &a, const Studentas &b)
 
 vector<Studentas> splittinimas(vector<Studentas> &studentai)
 {
+    rikiavimas(studentai, "grade");
+    cout<<"Duomenys dalinami"<<endl;
     auto it = std::find_if(studentai.begin(), studentai.end(), [](const auto &s) { return s.vidurkis >= 5; });
-
     vector<Studentas> temp (it, studentai.end());
     studentai.resize(studentai.size()-temp.size());
-  
     return temp;
 }

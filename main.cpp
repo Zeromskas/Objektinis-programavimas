@@ -3,7 +3,6 @@
 int main()
 {
     vector<Studentas> studentai;
-    std::chrono::high_resolution_clock::time_point start_time, end_time;
 
     int ivedimoTipas = 3;
     while (ivedimoTipas != 0 && ivedimoTipas != 1 && ivedimoTipas != 2)
@@ -28,7 +27,6 @@ int main()
                 string filename;
                 cout << "Įveskite pažymių failo pavadinimą:" << endl;
                 cin >> filename;
-                start_time = high_resolution_clock::now();
                 failoSkaitymas(studentai, filename);
                 break;
             }
@@ -38,10 +36,10 @@ int main()
             }
         }
     }
+
     else if (ivedimoTipas == 1)
     {
         pildymasKonsoleje(studentai);
-        start_time = high_resolution_clock::now();
     }
     else if (ivedimoTipas == 2)
         generuotiAtsitiktinius(studentai);
@@ -49,8 +47,6 @@ int main()
     if (studentai.empty())
         return 0;
 
-    rikiavimas(studentai, "grade");
-    
     vector<Studentas> studPass=splittinimas(studentai);
     studPass.shrink_to_fit();
     studentai.shrink_to_fit();
@@ -63,11 +59,5 @@ int main()
     spausdinimas(studentai, "studFail.txt");
     studentai.clear();
     
-
-    end_time = high_resolution_clock::now();
-
-    duration<double> duration = end_time - start_time;
-
-
     return 0;
 }

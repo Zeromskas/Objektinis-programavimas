@@ -10,6 +10,7 @@
 #include <chrono>
 #include <sstream>
 
+using std::accumulate;
 using std::cerr;
 using std::cin;
 using std::copy;
@@ -66,8 +67,5 @@ void failoSkaitymas(vector<Studentas> &studentai, string filename);
 void duomenuIvedimas(Studentas &temp);
 bool compareName(const Studentas &a, const Studentas &b);
 bool compareGrade(const Studentas &a, const Studentas &b);
-
-// void splittinimas(vector<Studentas> &studentai, vector<Studentas> &studPass, vector<Studentas> &studFail);
 vector<Studentas> splittinimas(vector<Studentas> &studentai);
-
 void rikiavimas(vector<Studentas> &studentai, string sortType);
