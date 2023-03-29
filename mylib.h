@@ -69,3 +69,4 @@ bool compareName(const Studentas &a, const Studentas &b);
 bool compareGrade(const Studentas &a, const Studentas &b);
 vector<Studentas> splittinimas(vector<Studentas> &studentai);
 void rikiavimas(vector<Studentas> &studentai, string const &sortType);
+void failoGeneravimas();

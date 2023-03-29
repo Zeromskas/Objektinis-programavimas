@@ -127,6 +127,82 @@ void generuotiAtsitiktinius(vector<Studentas> &studentai)
     }
 }
 
+void failoGeneravimas()
+{
+
+    int studentuKiekis = 0;
+    
+    while (true)
+    {
+        cout << "Kiek studentų norite generuoti?" << endl;
+        cin >> studentuKiekis;
+        if (cin.fail() || studentuKiekis <= 0 || studentuKiekis > 10000000)
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Įveskite studentų kiekį, kad 0<studentų_kiekis<10.000.000" << endl;
+        }
+        else
+            break;
+    }
+
+
+    int pazymiuKiekis = 0;
+    while (true)
+    {
+        cout << "Kiek pažymių norite generuoti kiekvienam studentui?" << endl;
+        cin >> pazymiuKiekis;
+        if (cin.fail() || pazymiuKiekis <= 0 || pazymiuKiekis > 10000000)
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Įveskite pažymių kiekį, kad 0<pažymių_kiekis<20" << endl;
+        }
+        else
+            break;
+    }
+
+    string filename = "studentai" + to_string(studentuKiekis) + ".txt";
+
+    std::chrono::high_resolution_clock::time_point start_time, end_time;
+    start_time = high_resolution_clock::now();
+
+    ofstream out(filename);
+
+    random_device rd;
+    mt19937 mt(rd());
+    uniform_int_distribution<int> dist(0, 10);
+
+    out << setw(15) << left << "Vardas" << setw(20) << left << "Pavardė";
+
+    for (int i = 1; i <= pazymiuKiekis; i++)
+        out << "ND" << setw(3) << left << i;
+
+    out << "Egzaminas" << endl;
+
+    unique_ptr<ostringstream> oss(new ostringstream());
+
+    for (int i = 1; i <= studentuKiekis; i++)
+    {
+        (*oss) << "Vardas" << setw(9) << left << i << "Pavardė" << setw(12) << left << i;
+        for (int j = 0; j < pazymiuKiekis; j++)
+            (*oss) << setw(5) << left << dist(mt);
+
+        (*oss) << dist(mt) << endl;
+        if ((i + 1) % 10 == 0 || i == studentuKiekis)
+        {
+            out << oss->str();
+            oss->str("");
+        }
+        if (i % (studentuKiekis / 100) == 0)
+            cout << 100 * i / studentuKiekis << "%" << endl;
+    }
+    end_time = high_resolution_clock::now();
+    duration<double> dur = end_time - start_time;
+    cout<<"Atsitiktinių pažymių failas 'studentai"<<studentuKiekis<<".txt' sugeneruotas"<<endl;
+    cout<< dur.count() <<" s"<< endl;
+}
+
 void failoSkaitymas(vector<Studentas> &studentai, string const &filename)
 {
     ifstream in(filename);

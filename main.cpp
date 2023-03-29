@@ -4,45 +4,56 @@ int main()
 {
     vector<Studentas> studentai;
 
-    int ivedimoTipas = 3;
-    while (ivedimoTipas != 0 && ivedimoTipas != 1 && ivedimoTipas != 2)
+    int ivedimoTipas = 4;
+
+    
+    while (ivedimoTipas != 0 && ivedimoTipas != 1 && ivedimoTipas != 2 && ivedimoTipas != 3)
     {
-        cout << "Ar norite duomenis skaityti iš failo (0), įvesti patys (1) ar, kad jie būtų sugeneruoti atsitiktinai (2)?" << endl;
+        cout<<endl;
+        cout<<"Pasirinkite, ką norite daryti: "<<endl;
+        cout << left << setw(60) << "Skaityti duomenis iš esamo failo (0)"
+             <<left<<setw(60)<<"Įvesti duomenis programoje (1)" << endl
+             << left << setw(60)<<"Generuoti atsitiktinių pažymių failą (2)"
+             <<left<<setw(60)<< "Generuoti ir iškart naudoti atsitiktinius (3)" << endl;
         cin >> ivedimoTipas;
         if (cin.fail())
         {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            ivedimoTipas = 3;
+            ivedimoTipas = 4;
         }
     }
 
-    if (ivedimoTipas == 0)
+    switch (ivedimoTipas)
     {
-        while (true)
-        {
-            try
+        case 0:
+            while (true)
             {
-                system("ls *.txt");
-                string filename;
-                cout << "Įveskite pažymių failo pavadinimą:" << endl;
-                cin >> filename;
-                failoSkaitymas(studentai, filename);
-                break;
+                try
+                {
+                    system("ls *.txt");
+                    string filename;
+                    cout << "Įveskite pažymių failo pavadinimą:" << endl;
+                    cin >> filename;
+                    failoSkaitymas(studentai, filename);
+                    break;
+                }
+                catch (const exception &e)
+                {
+                    cerr << "Klaida: " << e.what() << endl;
+                }
             }
-            catch (const exception &e)
-            {
-                cerr << "Klaida: " << e.what() << endl;
-            }
-        }
+            break;
+        case 1:
+            pildymasKonsoleje(studentai);
+            break;
+        case 2:
+            failoGeneravimas();
+            break;
+        case 3:
+            generuotiAtsitiktinius(studentai);
+            break;
     }
-
-    else if (ivedimoTipas == 1)
-    {
-        pildymasKonsoleje(studentai);
-    }
-    else if (ivedimoTipas == 2)
-        generuotiAtsitiktinius(studentai);
 
     if (studentai.empty())
         return 0;
