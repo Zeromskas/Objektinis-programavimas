@@ -113,7 +113,7 @@ void generuotiAtsitiktinius(vector<Studentas> &studentai)
     Pazymiai pazymiai;
     pazymiai.nd.reserve(pazymiuKiekis);
 
-    for (int i = 0; i < studentuKiekis; i++)
+    for (int i = 0; i < studentuKiekis; ++i)
     {
         temp.vardas = "vardas" + to_string(i);
         temp.pavarde = "pavarde" + to_string(i);
@@ -127,7 +127,7 @@ void generuotiAtsitiktinius(vector<Studentas> &studentai)
     }
 }
 
-void failoSkaitymas(vector<Studentas> &studentai, string filename)
+void failoSkaitymas(vector<Studentas> &studentai, string const &filename)
 {
     ifstream in(filename);
 
@@ -150,7 +150,7 @@ void failoSkaitymas(vector<Studentas> &studentai, string filename)
     while (in >> temp.vardas)
     {
         in >> temp.pavarde;
-        for (int i = 0; i < pazymiuKiekis; i++)
+        for (int i = 0; i < pazymiuKiekis; ++i)
         {
             in >> p;
             pazymiai.nd.push_back(p);
@@ -166,7 +166,7 @@ void failoSkaitymas(vector<Studentas> &studentai, string filename)
     // {
     //     std::stringstream ss(line);
     //     ss >> temp.vardas >> temp.pavarde;
-    //     for (int i = 0; i < pazymiuKiekis; i++)
+    //     for (int i = 0; i < pazymiuKiekis; ++i)
     //     {
     //         ss>>p;
     //         pazymiai.nd.push_back(p);
@@ -180,15 +180,17 @@ void failoSkaitymas(vector<Studentas> &studentai, string filename)
 
     in.close();
 }
-void rikiavimas(vector<Studentas> &studentai, string sortType)
+
+void rikiavimas(vector<Studentas> &studentai, string const &sortType)
 {
     cout<<"Duomenys rikiuojami pagal "<<sortType<<endl;
     if (sortType == "name")
         sort(studentai.begin(), studentai.end(), compareName);
-    if (sortType == "grade")
+    else if (sortType == "grade")
         sort(studentai.begin(), studentai.end(), compareGrade);
 }
-void spausdinimas(vector<Studentas> &studentai, string filename)
+
+void spausdinimas(vector<Studentas> &studentai, string const &filename)
 {
     cout<<"Duomenys išvedami..."<<endl;
 
@@ -201,7 +203,7 @@ void spausdinimas(vector<Studentas> &studentai, string filename)
     out << oss->str();
     oss->str("");
 
-    for (int i = 0; i < studentai.size(); i++)
+    for (int i = 0; i < studentai.size(); ++i)
     {
         (*oss) << setw(15) << left << studentai[i].vardas << setw(20) << left << studentai[i].pavarde << setw(18) << left << setprecision(3) << studentai[i].vidurkis << setw(18) << left << setprecision(3) << studentai[i].mediana << endl;
         if ((i + 1) % 10 == 0 || i + 1 == studentai.size())
@@ -217,14 +219,8 @@ void spausdinimas(vector<Studentas> &studentai, string filename)
 
 float vidurkioSkaiciavimas(Pazymiai &temp)
 {
-    float vidurkis = 0;
-    if (temp.nd.size() != 0)
-    {
-        int sum = 0;
-        for (int i = 0; i < temp.nd.size(); i++)
-            sum = sum + temp.nd[i];
-        vidurkis = 1.0 * sum / temp.nd.size();
-    }
+    float vidurkis;
+    vidurkis = temp.nd.size() != 0 ? accumulate(temp.nd.begin(), temp.nd.end(), 0.0) / temp.nd.size() : 0.0;
     return vidurkis * 0.4 + temp.egz * 0.6;
 }
 
@@ -235,13 +231,8 @@ float medianosSkaiciavimas(Pazymiai &temp)
     if (temp.nd.size() != 0)
     {
         sort(temp.nd.begin(), temp.nd.end());
-
-        if (temp.nd.size() % 2 == 1)
-            mediana = temp.nd[(temp.nd.size()) / 2];
-        else if (temp.nd.size() % 2 == 0)
-            mediana = (temp.nd[(temp.nd.size()) / 2 - 1] + temp.nd[(temp.nd.size()) / 2]) * 1.0 / 2.0;
+        mediana = temp.nd.size() % 2 == 1 ? temp.nd[(temp.nd.size()) / 2] : (temp.nd[(temp.nd.size()) / 2 - 1] + temp.nd[(temp.nd.size()) / 2]) * 1.0 / 2.0;
     }
-
     return 0.4 * mediana + 0.6 * temp.egz;
 } 
 
@@ -260,10 +251,10 @@ bool compareGrade(const Studentas &a, const Studentas &b)
 
 vector<Studentas> splittinimas(vector<Studentas> &studentai)
 {
+    rikiavimas(studentai, "grade");
+    cout<<"Duomenys dalinami"<<endl;
     auto it = std::find_if(studentai.begin(), studentai.end(), [](const auto &s) { return s.vidurkis >= 5; });
-
     vector<Studentas> temp (it, studentai.end());
     studentai.resize(studentai.size()-temp.size());
-  
     return temp;
 }
