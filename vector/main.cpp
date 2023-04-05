@@ -58,12 +58,10 @@ int main()
     if (studentai.empty())
         return 0;
 
+    rikiavimas(studentai, "grade");
     vector<Studentas> studPass=splittinimas(studentai);
-    studPass.shrink_to_fit();
-    studentai.shrink_to_fit();
     rikiavimas(studentai, "name");
     rikiavimas(studPass, "name");
-
 
     spausdinimas(studPass, "studPass.txt");
     studPass.clear();

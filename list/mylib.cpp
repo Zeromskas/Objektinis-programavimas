@@ -1,6 +1,6 @@
 #include "mylib.h"
 
-void pildymasKonsoleje(vector<Studentas> &studentai)
+void pildymasKonsoleje(list<Studentas> &studentai)
 {
     char testi;
     Studentas temp;
@@ -69,7 +69,7 @@ void duomenuIvedimas(Studentas &temp)
     cout << "Duomenys įrašyti" << endl;
 }
 
-void generuotiAtsitiktinius(vector<Studentas> &studentai)
+void generuotiAtsitiktinius(list<Studentas> &studentai)
 {
 
     int studentuKiekis = 0;
@@ -107,11 +107,9 @@ void generuotiAtsitiktinius(vector<Studentas> &studentai)
 
     cout << "Duomenys generuojami..." << endl;
 
-    studentai.reserve(studentuKiekis);
 
     Studentas temp;
     Pazymiai pazymiai;
-    pazymiai.nd.reserve(pazymiuKiekis);
 
     for (int i = 0; i < studentuKiekis; ++i)
     {
@@ -203,7 +201,7 @@ void failoGeneravimas()
     cout<< dur.count() <<" s"<< endl;
 }
 
-void failoSkaitymas(vector<Studentas> &studentai, string const &filename)
+void failoSkaitymas(list<Studentas> &studentai, string const &filename)
 {
     ifstream in(filename);
 
@@ -220,7 +218,6 @@ void failoSkaitymas(vector<Studentas> &studentai, string const &filename)
 
     Studentas temp;
     Pazymiai pazymiai;
-    pazymiai.nd.reserve(pazymiuKiekis);
     int p;
 
     while (in >> temp.vardas)
@@ -257,16 +254,16 @@ void failoSkaitymas(vector<Studentas> &studentai, string const &filename)
     in.close();
 }
 
-void rikiavimas(vector<Studentas> &studentai, string const &sortType)
+void rikiavimas(list<Studentas> &studentai, string const &sortType)
 {
     cout<<"Duomenys rikiuojami pagal "<<sortType<<endl;
     if (sortType == "name")
-        sort(studentai.begin(), studentai.end(), compareName);
+        studentai.sort(compareName);
     else if (sortType == "grade")
-        sort(studentai.begin(), studentai.end(), compareGrade);
+        studentai.sort(compareGrade);
 }
 
-void spausdinimas(vector<Studentas> &studentai, string const &filename)
+void spausdinimas(list<Studentas> &studentai, string const &filename)
 {
     cout<<"Duomenys išvedami..."<<endl;
 
@@ -279,9 +276,11 @@ void spausdinimas(vector<Studentas> &studentai, string const &filename)
     out << oss->str();
     oss->str("");
 
-    for (int i = 0; i < studentai.size(); ++i)
+    int i=0;
+    for (auto it : studentai)
     {
-        (*oss) << setw(15) << left << studentai[i].vardas << setw(20) << left << studentai[i].pavarde << setw(18) << left << setprecision(3) << studentai[i].vidurkis << setw(18) << left << setprecision(3) << studentai[i].mediana << endl;
+        (*oss) << setw(15) << left << it.vardas << setw(20) << left << it.pavarde << setw(18) << left << setprecision(3) << it.vidurkis << setw(18) << left << setprecision(3) << it.mediana << endl;
+        i++;
         if ((i + 1) % 10 == 0 || i + 1 == studentai.size())
         {
             out << oss->str();
@@ -306,8 +305,9 @@ float medianosSkaiciavimas(Pazymiai &temp)
 
     if (temp.nd.size() != 0)
     {
-        sort(temp.nd.begin(), temp.nd.end());
-        mediana = temp.nd.size() % 2 == 1 ? temp.nd[(temp.nd.size()) / 2] : (temp.nd[(temp.nd.size()) / 2 - 1] + temp.nd[(temp.nd.size()) / 2]) * 1.0 / 2.0;
+        temp.nd.sort();
+        auto it = std::next(temp.nd.begin(), temp.nd.size() / 2);
+        mediana = temp.nd.size() % 2 == 1 ? *it : (*it + *(std::next(it, -1))) * 1.0 / 2.0;
     }
     return 0.4 * mediana + 0.6 * temp.egz;
 } 
@@ -325,12 +325,33 @@ bool compareGrade(const Studentas &a, const Studentas &b)
     return a.vidurkis < b.vidurkis;
 }
 
-vector<Studentas> splittinimas(vector<Studentas> &studentai)
+list<Studentas> splittinimas(list<Studentas> &studentai)
 {
-    rikiavimas(studentai, "grade");
     cout<<"Duomenys dalinami"<<endl;
     auto it = std::find_if(studentai.begin(), studentai.end(), [](const auto &s) { return s.vidurkis >= 5; });
-    vector<Studentas> temp (it, studentai.end());
+    list<Studentas> temp (it, studentai.end());
     studentai.resize(studentai.size()-temp.size());
     return temp;
+}
+
+void splittinimas2(list<Studentas> &studentai, list<Studentas> &studPass, list<Studentas> &studFail)
+{
+    cout << "Duomenys dalinami" << endl;
+    auto it = std::find_if(studentai.begin(), studentai.end(), [](const auto &s) { return s.vidurkis >= 5; });
+    studPass.resize(std::distance(it, studentai.end()));
+    copy(it, studentai.end(), studPass.begin());
+    std::advance(it, -1);
+    studFail.resize(std::distance(studentai.begin(), it));
+    copy(studentai.begin(), it, studFail.begin());
+    studentai.clear();
+}
+void splittinimas3(list<Studentas> &studentai, list<Studentas> &studPass)
+{
+    cout << "Duomenys dalinami" << endl;
+    auto it = std::find_if(studentai.begin(), studentai.end(), [](const auto &s)
+                           { return s.vidurkis >= 5; });
+    if (it != studentai.end())
+    {
+        studPass.splice(studPass.end(), studentai, it, studentai.end());
+    }
 }
