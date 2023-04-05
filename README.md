@@ -25,8 +25,8 @@ Dalinimas 3 strategija (pernaudojant pradinį konteinerį, priskiriant reikšmes
 
 | **Deque**    | Dalinimas truko: | RAM apkrova |
 | ------------ | ---------------- | ----------- |
-| 1 strategija | 0.2264s          | 691MB       |
-| 2 startegija | 0.6053           | 687MB       |
+| 1 strategija | 0.2264s          | 667MB       |
+| 2 startegija | 0.4863s          | 743MB       |
 
 | **List**     | Dalinimas truko: | RAM apkrova |
 | ------------ | ---------------- | ----------- |

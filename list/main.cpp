@@ -59,7 +59,8 @@ int main()
         return 0;
 
     rikiavimas(studentai, "grade");
-    list<Studentas> studPass=splittinimas(studentai);
+    list<Studentas> studPass;
+    splittinimas3(studentai, studPass);
     rikiavimas(studentai, "name");
     rikiavimas(studPass, "name");
 
