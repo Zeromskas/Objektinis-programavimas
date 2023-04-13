@@ -1,4 +1,4 @@
-#include "mylib.h"
+#include "functions.h"
 
 void pildymasKonsoleje(vector<Studentas> &studentai)
 {

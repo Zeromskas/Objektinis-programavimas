@@ -1,11 +1,34 @@
-main: clean
-	g++ -O3 -std=c++20 main.cpp mylib.cpp -o main && ./main
+CPPFLAGS = -O3 -std=c++20
 
-test: clean
-	g++ -O3 -std=c++20 testing.cpp mylib.cpp -o testing && ./testing
-test2: clean
-	g++ -O3 -std=c++20 testing2.cpp mylib.cpp -o testing && ./testing
-test3: clean
-	g++ -O3 -std=c++20 testing3.cpp mylib.cpp -o testing && ./testing
+main: cleanStud prog
+	./prog
+
+prog: clean functions 
+	g++ $(CPPFLAGS) main.cpp functions.o -o prog
+
+test: cleanStud testCompile
+	./test
+
+testCompile: clean functions
+	g++ $(CPPFLAGS) testing.cpp functions.o -o test
+
+test2: cleanStud test2Compile
+	./test2
+
+test2Compile: clean functions
+	g++ $(CPPFLAGS) testing2.cpp functions.o -o test2
+
+test3: cleanStud test3Compile
+	./test3
+
+test3Compile: clean functions
+	g++ $(CPPFLAGS) testing3.cpp functions.o -o test3
+
+functions:
+	g++ $(CPPFLAGS) -c functions.cpp
+
 clean:
+	rm -f *.o main testing testing2
+	
+cleanStud:
 	rm -f studFail.txt studPass.txt
