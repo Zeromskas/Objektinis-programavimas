@@ -1,15 +1,52 @@
+Naudojimo instrukcija: Atidaryti terminalą programos aplanke, įvesti make, spaust enter ir sekti instrukcijas terminale
+# v1.0
+
+Dalinimas 1 strategija (pernaudojant pradinį konteinerį):
+
+1. Naudojant find_if surikiuotame studentų konteineryje rasti, kur vidurkis>=5, vieta pasižymima iteratoriumi it
+2. Sukuriamas naujas konteineris, kurį inicializuojant jam priskiriamos reikšmės iš pirminio studentų konteinerio nuo iteratoriaus iki pabaigos
+3. Pirminis studentų konteineris naudojant resize funkciją sumažinamas, taip panaikinant naująjame konteineryje esančias reikšmes
+
+Dalinimas 2 strategija (sukuriant 2 naujus konteinerius):
+
+1. Naudojant find_if surikiuotame studentų konteineryje rasti, kur vidurkis>=5, vieta pasižymima iteratoriumi it
+2. Du nauji konteineriai, naudojant resize, padidinami, kad talpintų tiek elementų, kiek reikės (distance(it, pradinis_konteineris.end()); advance(it, -1); distance(pradinis_konteineris.begin(), it))
+3. Naudojant funkciją copy, elementai kopijuojami į naujus konteinerius
+4. pradinis konteineris panaikinamas
+
+Dalinimas 3 strategija (pernaudojant pradinį konteinerį, priskiriant reikšmes naujam) (tik su list):
+
+1. Naudojant find_if surikiuotame studentų konteineryje rasti, kur vidurkis>=5, vieta pasižymima iteratoriumi it
+2. Naudojant splice funkciją, pradinio konteinerio dalis priskiriama naujam konteineriui
+
+| **Vector**   | Dalinimas truko: | RAM apkrova |
+| ------------ | ---------------- | ----------- |
+| 1 strategija | 0.1995s          | 809MB       |
+| 2 startegija | 0.5371s          | 1.05GB      |
+
+| **Deque**    | Dalinimas truko: | RAM apkrova |
+| ------------ | ---------------- | ----------- |
+| 1 strategija | 0.2264s          | 667MB       |
+| 2 startegija | 0.4863s          | 743MB       |
+
+| **List**     | Dalinimas truko: | RAM apkrova |
+| ------------ | ---------------- | ----------- |
+| 1 strategija | 3.0062s          | 1.13GB      |
+| 2 startegija | 5.4736s          | 1.50GB      |
+| 3 startegija | 1.2828s          | 769MB       |
+
 # v0.5
 
 Greitaveika
 
-|   **Vector**     | **1k**    | **10k**  | **100k** | **1M** | **10M** |
-|------------------|-----------|----------|----------|--------|---------|
-| **Nuskaitymas**  | _0.00469_ | _0.0639_ | _0.355_ | _3.47_ | _34.2_ |
-| **Rikiavimas 1** | _0.00008_ | _0.0007_ | _0.007_ | _0.08_ | _0.8_ |
-|  **Dalinimas**   | _0.00002_ | _0.0000_ | _0.001_ | _0.01_ | _0.2_ |
-| **Rikiavimas 2** | _0.00024_ | _0.0034_ | _0.044_ | _0.51_ | _6.7_ |
-| **Išvedimas**    | _0.00135_ | _0.0096_ | _0.095_ | _0.78_ | _8.6_ |
-| **Viso**         | _0.00641_ | _0.0779_ | _0.503_ | _4.87_ | _50.7_ |
+| **Vector**       | **1k**    | **10k**  | **100k** | **1M** | **10M** |
+| ---------------- | --------- | -------- | -------- | ------ | ------- |
+| **Nuskaitymas**  | _0.00469_ | _0.0639_ | _0.355_  | _3.47_ | _34.2_  |
+| **Rikiavimas 1** | _0.00008_ | _0.0007_ | _0.007_  | _0.08_ | _0.8_   |
+| **Dalinimas**    | _0.00002_ | _0.0000_ | _0.001_  | _0.01_ | _0.2_   |
+| **Rikiavimas 2** | _0.00024_ | _0.0034_ | _0.044_  | _0.51_ | _6.7_   |
+| **Išvedimas**    | _0.00135_ | _0.0096_ | _0.095_  | _0.78_ | _8.6_   |
+| **Viso**         | _0.00641_ | _0.0779_ | _0.503_  | _4.87_ | _50.7_  |
 
 [Perdaryta vietoj vector naudojant deque](https://github.com/Zeromskas/Objektinis-programavimas/tree/v0.5-deque)
 
