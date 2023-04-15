@@ -14,7 +14,7 @@ int main()
     duration<double> dur;
 
     // string filenames[5]{"studentai1k.txt", "studentai10k.txt", "studentai100k.txt", "studentai1M.txt", "studentai10M.txt"};
-    string filenames[1]{"studentai10M.txt"};
+    string filenames[1]{"studentai1M.txt"};
 
     Time times[5];
     times[0].part="Nuskaitymas", times[1].part="Rikiavimas", times[2].part="Dalinimas", times[3].part="Išvedimas", times[4].part="Viso";

@@ -28,7 +28,7 @@ functions:
 	g++ $(CPPFLAGS) -c functions.cpp
 
 clean:
-	rm -f *.o main testing testing2
+	rm -f *.o main test test2
 	
 cleanStud:
 	rm -f studFail.txt studPass.txt

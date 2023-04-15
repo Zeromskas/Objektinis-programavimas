@@ -1,4 +1,5 @@
 Naudojimo instrukcija: Atidaryti terminalą programos aplanke, įvesti make, spaust enter ir sekti instrukcijas terminale
+
 # v1.0
 
 Dalinimas 1 strategija (pernaudojant pradinį konteinerį):
